@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <h2> Detalhes do produto <%= @produto.titulo %> </h2>
+</p>
+
+<h4>
+
+  <p> Código: <%= @produto.id %> </p>
+  
+  <p> Descricao: <%= @produto.descricao %> </p>
+
+  <p> <%= image_tag @produto.imagem.url(:media) %> </p>
+
+  <p> Valor: <%= @produto.preco %> </p>
+
+  <p> Validade: <%=h @produto.validade.strftime("%d/%m/%Y") %> </p>
+
+  <p> Grupo: <%= @produto.grupo.descricao %> </p>
+
+  <p> Data do Cadastro: <%=h @produto.created_at.strftime("%d/%m/%Y %H:%M") %> </p>
+
+</h4>
+<p>
+
+  <%= link_to 'Voltar', produtos_path %>
+  <%= link_to 'Editar', edit_produto_path %> 
+  <%= link_to 'Excluir', produtos_path,
+      :confirm => 'Confirma a exclusão do registro?',
+      :method => :delete %>
+</p>
+
+

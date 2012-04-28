@@ -1,0 +1,37 @@
+<!-- multipart permite realizar uploads de arquivos !-->
+<%= form_for(@produto, :html => { :multipart => true }) do |form| %>
+
+  <% if @produto.errors.any? %>
+    <ul>
+      <% @produto.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  
+  <p> <%= form.label :titulo, "Título" %> </br>
+  <%= form.text_field :titulo, :size => 40 %> </p>
+  
+  <p> <%= form.label :descricao, "Descrição" %> </br>
+  <%= form.text_area :descricao, :rows => 6, :cols => 40 %> </p>
+  
+  <p> <%= form.label :preco, "Valor" %> </br>
+  <%= form.text_field :preco, :size => 12 %> </p>
+
+  <p> <%= form.label :validade, "Data de validade" %> </br>
+  <%= form.date_select(:validade, :order => [:day, :month, :year],
+    :use_month_numbers => true) %> </p>
+
+  <p> <%= form.label :imagem %> </br>
+      <%= form.file_field :imagem %> </p>
+
+  <p> <%= form.label :grupo, "Grupo" %> </br>
+  <%= form.select :grupo_id, Grupo.find(:all).collect {|gru| [gru.descricao, gru.id] } %>
+  </p>
+
+  <p> <%= form.submit "Gravar" %> </p>
+
+<% end %>
+
+<%= link_to 'Voltar', produtos_path %>
+

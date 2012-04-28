@@ -1,0 +1,6 @@
+<% for produto in @produtos %>
+    <titulo> <%= produto.titulo %> </titulo>
+    <numero_em_reais> <%= numero_em_reais(produto.preco) %> </numero_em_reais>
+    <validade> <%= produto.validade.strftime("%d/%m/%Y") %> </validade>
+<% end %> 
+

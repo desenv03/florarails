@@ -1,0 +1,9 @@
+<%= form_for(@grupo) do |form| %>
+  <fieldset>
+    <legend> Edição do Grupo </legend>
+    <p>
+      <%= form.label :descricao, "Descrição: " %>
+      <%= form.text_field :descricao, :size => 40 %>
+  </fieldset>
+  <%= form.submit "Alterar" %>
+<% end %>

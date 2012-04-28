@@ -1,0 +1,35 @@
+<h1> Catálogo de Produtos </h1>
+<% for produto in @produtos %>
+  <div class= "entrada" >
+    <td>
+      <%= link_to image_tag(produto.imagem.url(:thumb),
+        :alt => produto.titulo,
+        :title => produto.titulo,
+        :border => 0),
+        {:controller => "catalogo",
+         :action => :detalhes,
+         :id => produto} %> 
+    </td>
+         
+      <h7> <%= link_to produto.titulo,
+        {:controller => "catalogo",
+         :action => :detalhes,
+         :id => produto},
+         :popup => true %> 
+      </h7> <br>
+         
+      <%=h truncate(produto.descricao.gsub(/<.*?>/,''), :omission => "... detalhes", :length => 100) %> <br>
+      <p> 
+        <%= numero_em_reais(produto.preco) %> 
+      </p> <br> 
+        <%= link_to image_tag("cart.png", :alt => "botão carrinho de compras",
+                                                 :title => "Coloque este produto no carrinho de compras",
+                                                 :size => "24x24",
+                                                 :border => 0),
+                                                 {:controller => :catalogo,
+                                                  :action => :adicionar_no_carrinho,
+                                                  :id => produto} %>  
+
+
+  </div>
+<% end %>

@@ -1,0 +1,13 @@
+<h2> Detalhes do grupo <%= @grupo.descricao %></h2>
+<h4>
+  <p>Código: <%= @grupo.id%></p>
+  <p>Descrição: <%= @grupo.descricao %></p>
+  <p>Data do cadastro:
+  <%= @grupo.created_at.strftime("%d/%m/%Y %H:%M") %></p>
+</h4>
+<p>
+<%= link_to 'Voltar', grupos_path %>
+<%= link_to 'Editar', edit_grupo_path %>
+<%= link_to 'Excluir', grupo_path,
+      :confirm => 'Confirma a exclusão do regisro?',
+      :method => :delete %>

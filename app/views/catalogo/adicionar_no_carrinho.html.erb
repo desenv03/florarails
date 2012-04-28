@@ -1,0 +1,46 @@
+<h1> Seu carrinho de compras </h1>
+
+<% if @carrinho.itens.empty? %>
+  <%= flash[:info] = 'Seu carrinho está vazio!' %>
+  <%= link_to image_tag("basket_add.png", 
+                        :alt => "botão continuar comprando",
+                        :title => "Adicione produtos ao seu carrinho",
+                        :border => 0),
+                        "Escolha os produtos em nosso catálogo",
+                        {:controller => :catalogo,
+                         :action => :index} %>
+                        
+<% else %>
+  <ul>
+    <table>
+      <tr>
+        <td> Quantidade   </td>
+        <td> Produto      </td>
+        <td> Valor Total  </td>
+        <td> Remover item </td>
+        <td>              </td>
+      </tr>
+      <%= render 'itens' %>
+      <td colspan = "2"> Valor Total do Pedido: </td>
+      <td> 
+        <%= numero_em_reais(@carrinho.preco_total) %>
+      </td>
+      <td></td>
+      <td></td>
+    </table>
+
+    <%= link_to image_tag("basket_add.png",
+                           :alt => "botão continuar comprando",
+                           :title => "Adicione mais produtos ao seu carrinho",
+                           :border => 0), "Continuar comprando",
+                           {:controller => :catalogo,
+                            :action => :index} %>
+    <%= link_to image_tag("basket_remove.png",
+                           :alt => "botão limpar carrinho",
+                           :title => "Remova todos os itens do seu carrinho",
+                           :border => 0), "Esvaziar carrinho",
+                           {:controller => :catalogo,
+                            :action => :esvaziar_carrinho} %>
+
+
+<% end %>

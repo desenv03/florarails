@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> Florarails: Sua floricultura na Web :::: Administração do site </title>
+  <%= stylesheet_link_tag  'florarails', :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div id = "conteudo" >
+  <div id = "cabecalho" >
+    Administração FloraRails
+  </div>
+  <p>
+  <div id= "corpo" >
+    <div id= "lateral" >
+      <ul>
+        <li> <%= link_to "Grupos",
+             :controller => "grupos", :action => "index" %>
+        <li> <%= link_to "Produtos",
+             :controller => "produtos", :action => "index" %>
+        <li> <a href="#" > Logout </a>
+      </ul>
+    </div>
+    <div id = "direita" >
+      <div id = "principal" >
+       <div id = "principal" >
+        <%= mensagem %>
+           <%= yield %>
+      </div>
+    </div>
+  </div>
+  <div id = "rodape" >
+  @ 2009 FloraRails - Todos os direitos reservados
+  </div>
+</div>
+</body>
+</html>

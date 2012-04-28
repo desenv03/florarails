@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  titulo: MyString
+  descricao: MyText
+  preco: 9.99
+  validade: 2012-04-03
+
+two:
+  titulo: MyString
+  descricao: MyText
+  preco: 9.99
+  validade: 2012-04-03

@@ -1,0 +1,25 @@
+<% for item in @carrinho.itens %>
+  <tr>
+    <td><%= item.quantidade %></td>
+    <td><%= link_to item.titulo,
+                   {:controller => "catalogo",
+                    :action => :detalhes,
+                    :id => item.codigo},
+                    :popup => true %>
+    </td>
+    <td>
+      <%= numero_em_reais(item.preco) %>
+    </td> </td>
+    <td> </td>
+    <td align="center">
+      <%= link_to image_tag("basket_delete.png",
+                             :alt => "botão remover item",
+                             :title => "Remova o item do carrinho",
+                             :border => 0),
+                             {:controller => :catalogo,
+                              :action => :remover_do_carrinho, :id => item.codigo} %>
+    </td>
+  </tr>
+<% end %>
+              
+            

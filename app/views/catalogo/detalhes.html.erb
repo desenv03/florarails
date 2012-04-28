@@ -1,0 +1,73 @@
+<h1> Categoria: <%= @produto.grupo.descricao %> </h1>
+
+<h2> <%=h @produto.titulo %> </h2>
+
+  <td> <%= image_tag(@produto.imagem.url(:media),
+                      :id => "foto",
+                      :alt => @produto.titulo,
+                      :title => @produto.titulo) %>
+  </td> <br> 
+      
+  <!-- Efeitos Javascript --> 
+
+  <script type="text/javascript">
+
+    function aumenta(){
+      document.getElementById("foto").width = document.getElementById("foto").width + 5;
+      document.getElementById("foto").height = document.getElementById("foto").height + 5;
+    }
+
+    function diminui(){
+      document.getElementById("foto").width = document.getElementById("foto").width - 5;
+      document.getElementById("foto").height = document.getElementById("foto").height -5;
+    }
+
+    function esconde(){
+      document.getElementById("foto").style.display = "none";
+    }
+
+    function mostra(){
+      document.getElementById("foto").style.display = "";
+    }
+
+    function mostraEscondeDetalhes(){
+      if(document.getElementById("detalhes").style.display != "none"){
+        document.getElementById("detalhes").style.display = "none";
+      }
+      else{
+        document.getElementById("detalhes").style.display = "";
+      }
+    }
+    
+  </script>
+  
+  <button onclick="diminui()">Reduzir</button>
+  
+  <button onclick="aumenta()">Ampliar</button>
+
+  <button onclick="esconde()">Ocultar</button>
+
+  <button onclick="mostra()">Mostrar</button>  
+
+  <div>
+    <p>
+      <div id="detalhes">
+        <h3> <%=h @produto.descricao %> <br> </h3>
+      </div>
+
+      <button onclick="mostraEscondeDetalhes()">Esconder/Mostrar Detalhes</button> 
+
+      <div class="entrada">
+        <p> Valor: <%= numero_em_reais(@produto.preco) %> </p>
+        <%= link_to image_tag("carrinho.gif",
+                       :alt => "Botão carrinho de compras",
+                       :title => "Adicione "+@produto.titulo+ " no carrinho de compras",
+                       :size => "24x24",
+                       :border => 0),
+                       {:controller => :catalogo,
+                        :action => :adicionar_no_carrinho,
+                        :id => @produto} %>
+        </p>
+      </div>
+    </p>
+  </div>

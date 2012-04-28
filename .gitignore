@@ -1,0 +1,16 @@
+log/*.log
+log/*.out
+log/*.pid
+tmp/**/*
+.DS_Store
+db/schema.rb
+db/schema.sql
+db/*.sqlite3*
+config/database.yml
+.project
+.#*
+tmp/.*
+\#*
+*~
+vendor/**/**/doc/*
+rsa_key*

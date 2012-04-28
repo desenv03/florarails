@@ -1,0 +1,40 @@
+<h1> Listagens do Produto </h1>
+
+<table>
+  <tr>
+    <th> Titulo </th>
+    <th> Imagem </th>
+    <th> Descricao </th>
+    <th> Preco </th>
+    <th> Validade </th>
+  </tr>
+
+<% for produto in @produtos %>
+  <tr>
+  
+    <td> <%= produto.titulo %> </td>
+    <td> <%= image_tag produto.imagem.url(:pequena) %> </td>
+    <td> <%= truncate(produto.descricao, 
+            :ommision => "...", :length => 35) %> </td>
+            
+    <td> <%= numero_em_reais(produto.preco) %> </td>
+    
+    <td> <%= produto.validade.strftime("%d/%m/%Y") %> </td>
+    
+    <td> <%= link_to image_tag("pencil_go.png"), produto %>
+    
+         <%= link_to image_tag("pencil.png"),
+             edit_produto_path(produto) %>
+             
+         <%= link_to image_tag ("pencil_delete.png"), produto, :confirm => 
+              'Você tem certeza que deseja apagar o produto?', 
+              :method => :delete %> </td>
+  </tr>
+<% end %> 
+
+</table>
+
+<br />
+
+<%= link_to image_tag("pencil_add.png"), new_produto_path %>
+<%= link_to 'Novo Produto', new_produto_path %>

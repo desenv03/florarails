@@ -1,0 +1,7 @@
+<h1> Listagem dos grupos </h1>
+<% for grupo in @grupos %>
+  <h2><%= grupo.id %> - <%= link_to grupo.descricao,
+            grupo_path(grupo) %></h2>
+<% end %>
+<p>
+<%= link_to 'Cadastrar novo grupo', new_grupo_path %>

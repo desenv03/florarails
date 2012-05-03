@@ -4,11 +4,14 @@ Florarails::Application.routes.draw do
 
   resources :produtos
   resources :grupos
-  #resources :catalogo
- 
+  
+  match 'catalogo' => 'catalogo#detalhes'
+  match 'catalogo' => 'catalogo#index' 
   match 'catalogo/adicionar_no_carrinho/:id' => 'catalogo#adicionar_no_carrinho'
   match 'catalogo/esvaziar_carrinho' => 'catalogo#esvaziar_carrinho'
   match 'catalogo/remover_do_carrinho/:id' => 'catalogo#remover_do_carrinho'
+  match 'catalogo/procurar' => 'catalogo#procurar'
+  match 'catalogo/lista_itens_grupo' => 'catalogo#lista_itens_grupo'
 
   
   # The priority is based upon order of creation:

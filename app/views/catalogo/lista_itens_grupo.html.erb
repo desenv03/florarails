@@ -1,0 +1,8 @@
+<h1> Catálogo de prodtos da categoria <%=h @grupo.descricao %> </h1>
+
+<%= render 'itens_procurar' %>
+
+<h2>
+  <%= flash[:info] = "Não há nenhum produto em "+ @grupo.descricao if @produtos.empty? %>
+</h2>
+                        

@@ -2,14 +2,12 @@
 
 <h1> Filtro de Produtos </h1>
 
-<h2> Busca de produtos - procurando '<%= @termo %>' </h2>
-
-<p> A sua busca por "<%= @termo %> " encontrou <%= pluralize @produtos.size, "produto" %>: </p>
+<h2> Procurando por '<%= @termo %>' </h2>
 
 <% else %>
 
-  <%= flah[:info] = "Não há nenhum produto com o critério de busca "+ @termo %>
-
+  <%= flash[:info] = "Não há nenhum produto com o critério de busca "+ @termo %>
+ 
 <% end %>
 
-<%=rnder :partial => 'itens_procurar' %>
+<%= render :partial => 'itens_procurar' %>

@@ -16,7 +16,7 @@
       </div>
       <div id = "menu">
         <div id = "procurar">
-          <% form_for :form, :url => { :action => "procurar" },
+          <%= form_for :form, :url => { :action => "procurar" },
                                        :method => :get do |f| %>
             Procurar: <%= text_field_tag :busca %>
             <%= submit_tag 'OK' %>

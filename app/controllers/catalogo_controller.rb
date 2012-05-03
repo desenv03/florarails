@@ -39,7 +39,6 @@ class CatalogoController < ApplicationController
 
 
   def remover_do_carrinho
-    puts "****************************************************************************************************************"
     produto = Produto.find(params[:id].to_i)
       @carrinho = localiza_carrinho
       @carrinho.remove_produto(produto)
@@ -52,11 +51,17 @@ class CatalogoController < ApplicationController
     @termo = params[:busca].downcase
     @produtos = Produto.find(:all, :conditions => ["LOWER(descricao)
       LIKE ? or LOWER(titulo) LIKE ? and validade >=?", '%'+@termo+'%','%'+@termo+'%',
-      Date.current], :order => 'validade ASC')
-    unless @produto.size > 0
-    flash.now[:info] = "Não foi encontrado nenhum produto com esse críterio de busca"
+      Date.current ],:order => 'validade ASC')
+    unless @produto && @produto.size > 0
+      flash.now[:info] = "Não foi encontrado nenhum produto com esse críterio de busca"
     end
     @carrinho = localiza_carrinho
+  end
+
+
+  def lista_itens_grupo
+    @produtos = Produto.lista_produto_grupo(params[:grupo])
+    @grupo = Grupo.find(params[:grupo])
   end
   
  

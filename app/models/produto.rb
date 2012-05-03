@@ -40,9 +40,11 @@ belongs_to :grupo
 
   #já o default_url irá definir uma imagem que será exibida caso não haja imagem
 
+
   #obriga o usuário a escolher um arquivo
   validates_attachment_presence :imagem,
     :message => 'Imagem deve ser informada'
+
 
   #verifica se o tipo de arquivo está correto
   validates_attachment_content_type :imagem,
@@ -53,6 +55,7 @@ belongs_to :grupo
     validates_numericality_of :preco
     validate :preco_deve_ser_no_minimo_um_centavo
     validates_uniqueness_of :titulo
+
   
   #Método protected indica que o acesso é apenas a objetos da classe e subclasse
   protected
@@ -61,4 +64,10 @@ belongs_to :grupo
     errors.add(:preco, 'deve ser no mínimo 0.01') if preco.nil? || preco < 0.01
   end
 
+  def self.lista_produto_grupo(grupo)
+    find(:all, :order => "titulo",
+         :conditions => ['validade >= ? and grupo_id = ?', Date.current, grupo])
+  end
+
+  
 end

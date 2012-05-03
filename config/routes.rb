@@ -6,7 +6,7 @@ Florarails::Application.routes.draw do
 
   resources :produtos
   resources :grupos
-  resources :catalogo
+  #resources :catalogo
  
   match 'catalogo/adicionar_no_carrinho/:id' => 'catalogo#adicionar_no_carrinho'
   match 'catalogo/esvaziar_carrinho' => 'catalogo#esvaziar_carrinho'

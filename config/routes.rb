@@ -1,8 +1,6 @@
 Florarails::Application.routes.draw do
-  
-  get "catalogo/index"
-  get "catalogo/detalhes"
-  
+
+  root :to => "catalogo#index"
 
   resources :produtos
   resources :grupos

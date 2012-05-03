@@ -3,10 +3,10 @@ module ApplicationHelper
     texto = ""
     [:aviso, :importante, :erro, :info].each {|type|
     if flash[type]
-      texto += "<class=" + '"' + "#{type}" + '"' + ">#{flash[type]}"
+      texto += "<class=" + '"' + "#{type}" + '"' + ">#{flash[type]}</class>"
     end
     }
-    texto
+    raw texto
   end
 
   #formatar o preço como moeda

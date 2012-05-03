@@ -32,7 +32,6 @@ class CatalogoController < ApplicationController
 
 
   def esvaziar_carrinho
-    puts 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
     session[:carrinho] = nil
     flash[:info] = "O seu carrinho agora está vazio!"
     redirect_to :action => :index

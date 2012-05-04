@@ -15,12 +15,38 @@
                        FloraRails: Sua Floricultura na Web
       </div>
       <div id = "menu">
+      
         <div id = "procurar">
-          <%= form_for :form, :url => { :action => "procurar" },
-                                       :method => :get do |f| %>
-            Procurar: <%= text_field_tag :busca %>
-            <%= submit_tag 'OK' %>
-          <% end %>
+
+          <tr>
+          
+            <td>
+              <label for="busca">
+                <font size = "1">
+                  <b>Busca de produtos:</b>
+                </font>
+              </label>
+            </td>
+            
+            <td>
+              <%= text_field_tag :busca %>
+            </td>
+            <td>
+              <img alt="aguarde" id="aguarde" src="images/aguarde.gif" style="display:none;" />
+            </td>
+            
+          </tr>
+          
+          <%= observe_field("busca", 
+                            :frequency => 0.5,
+                            :update => 'principal',
+                            :loading => "Element.show('aguarde')",
+                            :complete => "Element.hide('aguarde')",
+                            :url => { :controller => 'catalogo',
+                                      :action => 'procurar' },
+                            :with => "'busca=' + escape(value)") %>
+        </div>
+        
         </div>
         <li> 
           <a href="#a"> Inicio </a> 
@@ -40,7 +66,14 @@
           <div id = "lateral">
             <ul>
               <li> Categorias
-              <li> <a href="#">...</a>
+              <% for grupo in Grupo.find(:all) %>
+                <li>
+                  <%= link_to grupo.descricao,
+                          {:controller => "catalogo",
+                           :action => "lista_itens_grupo",
+                           :grupo => grupo.id} %>
+                </li>
+              <% end %>
             </ul>
           </div>
           <div id = "direita">

@@ -4,6 +4,9 @@ Florarails::Application.routes.draw do
 
   resources :produtos
   resources :grupos
+  resources :catalogo do
+    get :autocomplete_produto_titulo, :on => :collection
+  end
   
   # não deve haver dois matchs apontando a mesma rota
   # match 'catalogo' => 'catalogo#detalhes'

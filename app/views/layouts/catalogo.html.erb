@@ -37,17 +37,11 @@
             
           </tr>
           
-          <%= observe_field("busca", 
-                            :frequency => 0.5,
-                            :update => 'principal',
-                            :loading => "Element.show('aguarde')",
-                            :complete => "Element.hide('aguarde')",
-                            :url => { :controller => 'catalogo',
-                                      :action => 'procurar' },
-                            :with => "'busca=' + escape(value)") %>
+          <!-- form_for @catalogo do |f|
+            f.autocomplete_field :produto_titulo, autocomplete_produto_titulo_produtos_path
+          end  -->
         </div>
         
-        </div>
         <li> 
           <a href="#a"> Inicio </a> 
         </li>

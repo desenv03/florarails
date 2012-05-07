@@ -1,6 +1,5 @@
 class CatalogoController < ApplicationController
 
-
   def index
     @produtos= Produto.localizar_produto_para_venda 
   end
@@ -45,18 +44,20 @@ class CatalogoController < ApplicationController
       render :action => :adicionar_no_carrinho
   end
 
-
+  
+  autocomplete :produto, :titulo
   #Método para efetuar a busca de um produto
-  def procurar
-    @termo = params[:busca].downcase
-    @produtos = Produto.find(:all, :conditions => ["LOWER(descricao)
-      LIKE ? or LOWER(titulo) LIKE ? and validade >=?", '%'+@termo+'%','%'+@termo+'%',
-      Date.current ],:order => 'validade ASC')
-    unless @produto && @produto.size > 0
-      flash.now[:info] = "Não foi encontrado nenhum produto com esse críterio de busca"
-    end
-    @carrinho = localiza_carrinho
-  end
+#  def procurar
+#    autocomplete :produto, :titulo
+#    @termo = params[:busca].downcase
+#    @produtos = Produto.find(:all, :conditions => ["LOWER(descricao)
+#      LIKE ? or LOWER(titulo) LIKE ? and validade >=?", '%'+@termo+'%','%'+@termo+'%',
+#      Date.current ],:order => 'validade ASC')
+#    unless @produto && @produto.size > 0
+#      flash.now[:info] = "Não foi encontrado nenhum produto com esse críterio de busca"
+#    end
+#    @carrinho = localiza_carrinho
+#  end
 
 
   def lista_itens_grupo

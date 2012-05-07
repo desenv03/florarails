@@ -25,21 +25,6 @@ belongs_to :grupo
                                 :media => "200x150",
                                 :pequena => "80x60",
                                 :thumb => "40x30"}
-  #Configuração do PaperClip
-  #has_attached_file :imagem,
-  #  :styles => {:grande => "800x600>",
-  #              :media => "200x150",
-  #              :pequena => "80x60",
-  #              :thumb => "40x30"},
-  #  :path => ":rails_root/images/:class/:id/:style_:basename.:extension",
-  #  :url => "images/:class/:id/:style_:basename.:extension",
-  #  :default_url => "images/sem_foto.gif"
-    #nos parametros path e url estamos definindo que as imagens estarão dentro do 
-    #diretório assets/images e que será criado um diretório com o nome da classe
-    #no nosso exemplo produtos e seu respectivo id
-
-  #já o default_url irá definir uma imagem que será exibida caso não haja imagem
-
 
   #obriga o usuário a escolher um arquivo
   validates_attachment_presence :imagem,

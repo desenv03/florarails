@@ -16,6 +16,8 @@ gem 'cloudfiles'
 gem 'cocaine' #a dependency that paperclilp didn't pick up yet
 gem 'paperclip-cloudfiles', :require => 'paperclip'
 
+gem 'rails3-jquery-autocomplete'
+
 
 # Gems used only for assets and not required
 # in production environments by default.

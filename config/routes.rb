@@ -5,7 +5,11 @@ Florarails::Application.routes.draw do
   resources :produtos
   resources :grupos
   
-  match 'catalogo' => 'catalogo#detalhes'
+  # não deve haver dois matchs apontando a mesma rota
+  # match 'catalogo' => 'catalogo#detalhes'
+  # sugestão 
+  # match 'catalogo/detalhes' => 'catalogo#detalhes'
+  
   match 'catalogo' => 'catalogo#index' 
   match 'catalogo/adicionar_no_carrinho/:id' => 'catalogo#adicionar_no_carrinho'
   match 'catalogo/esvaziar_carrinho' => 'catalogo#esvaziar_carrinho'

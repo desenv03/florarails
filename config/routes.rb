@@ -2,6 +2,7 @@ Florarails::Application.routes.draw do
 
   root :to => "catalogo#index"
 
+  resources :clientes
   resources :produtos
   resources :grupos
   resources :catalogo do
@@ -19,6 +20,7 @@ Florarails::Application.routes.draw do
   match 'catalogo/remover_do_carrinho/:id' => 'catalogo#remover_do_carrinho'
   match 'catalogo/procurar' => 'catalogo#procurar'
   match 'catalogo/lista_itens_grupo' => 'catalogo#lista_itens_grupo'
+  match 'clientes/new' => 'clientes#new'
 
   
   # The priority is based upon order of creation:

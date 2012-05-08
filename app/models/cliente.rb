@@ -32,7 +32,7 @@ class Cliente < ActiveRecord::Base
   validates_format_of :telefone, :with => %r{^\(\d{2}\)\d{4}-\d{4}$}i,
                       :message => 'O telefone deve ser digitado no formato: (99)9999-9999'
 
-  validates_format_of :email, :with => %r{^[A-Za-z0-9_.-]+@([A-Za-z0-9_]+\.)+[A-Za-z]{2,4}$}i
+  validates_format_of :email, :with => %r{^[A-Za-z0-9_.-]+@([A-Za-z0-9_]+\.)+[A-Za-z]{2,4}$}i,
                       :message => 'O e-mail informado é inválido'
 
   # Método para criptografar a senha com SHA

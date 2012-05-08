@@ -1,0 +1,103 @@
+<%= form_for(@cliente) do |f| %>
+
+<fieldset>
+
+  <legend> Informe seus dados: </legend>
+
+<table>
+  <tr>
+    <td colspan = "2"> 
+      Nome: <br><%= f.text_field :nome, 
+                                 :maxlength => 60, 
+                                 :size => 50 %> 
+    </td>
+  </tr>
+  
+  <tr>
+    <td colspan = "2">
+      e-mail: <br><%= f.text_field :email,
+                                   :maxlength => 60,
+                                   :size => 50 %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      Senha: <br><%= f.password_field :senha, 
+                                      :maxlength => 60,
+                                      :size => 20 %>
+    </td>
+    <td>
+      Confirmação da senha: <br><%= f.password_field :senha_confirmation,
+                                                     :maxlength => 60,
+                                                     :size => 20 %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      CPF: 999.999.999-99 <br><%= f.text_field :cpf,
+                                               :maxlength => 14,
+                                               :size => 14 %>
+    </td>
+    <td> 
+      Telefone: (99)9999-9999 <br><%= f.text_field :telefone,
+                                                   :maxlength => 13,
+                                                   :size => 13 %>
+    </td>
+  </tr>
+
+    <td colspan = "2">
+      CEP: 99999-999 <br><%= f.text_field :cep,
+                                :size => 9,
+                                :maxlength => 9 %>
+    </td>
+                                
+  <tr>
+    <td> 
+      Cidade: <br><%= f.text_field :cidade,                                       
+                                   :maxlength => 60,
+                                   :size => 20 %>
+    </td>
+    <td>
+      UF: <br><%= f.select :uf,
+	                         ['AC', 'AL', 'AP', 'BA', 'CE', 'DF', 'ES', 
+	                          'GO', 'MA', 'MG', 'MS', 'MT', 'PA', 'PB', 
+	                          'PE', 'PI', 'PR', 'RJ', 'RN', 'RO', 'RR', 
+	                          'RS', 'SC', 'SE', 'SP', 'TO'] %>
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan = "2">
+      Endereço: <br> <%=f.text_field :logradouro,
+                                     :maxlength => 100,
+                                     :size => 50 %>
+    <td>
+  </tr>
+
+  <tr>
+    <td>
+      Complemento: <br> <%= f.text_field :complemento,
+                                         :maxlength => 20,
+                                         :size => 10 %>
+    </td>
+    <td>
+      Bairro: <br><%= f.text_field :bairro,
+                                   :maxlength => 60,
+                                   :size => 30 %>
+    </td>
+  </tr>
+
+</table>
+
+</fieldset>
+
+<p>
+  <%= f.submit "Gravar" %>
+</p>
+
+<% end %>
+
+<link_to 'Voltar', catalogo_path %>
+                                                                                                                                                                                                   

@@ -5,16 +5,13 @@ Florarails::Application.routes.draw do
   resources :clientes
   resources :produtos
   resources :grupos
-  resources :catalogo do
-    get :autocomplete_produto_titulo, :on => :collection
-  end
   
   # não deve haver dois matchs apontando a mesma rota
   # match 'catalogo' => 'catalogo#detalhes'
   # sugestão 
-  # match 'catalogo/detalhes' => 'catalogo#detalhes'
-  
+
   match 'catalogo' => 'catalogo#index' 
+  match 'catalogo/detalhes' => 'catalogo#detalhes'
   match 'catalogo/adicionar_no_carrinho/:id' => 'catalogo#adicionar_no_carrinho'
   match 'catalogo/esvaziar_carrinho' => 'catalogo#esvaziar_carrinho'
   match 'catalogo/remover_do_carrinho/:id' => 'catalogo#remover_do_carrinho'

@@ -11,6 +11,7 @@
                         
 <% else %>
   <ul>
+  
     <table>
       <tr>
         <td> Quantidade   </td>
@@ -19,13 +20,27 @@
         <td> Remover item </td>
         <td>              </td>
       </tr>
+      
       <%= render 'itens' %>
       <td colspan = "2"> Valor Total do Pedido: </td>
       <td> 
         <%= numero_em_reais(@carrinho.preco_total) %>
       </td>
+      
+      <% if not @carrinho.itens.empty? %>
+        <td></td>
+        <td><%= link_to image_tag("basket_go.png",
+                        :alt => "botão fechar o pedido",
+                        :title => "Clique aqui para fechar o pedido",
+                        :border => 0),
+                        {:controller => :pedidos,
+                         :action => :fechar_pedido} %>
+        </td>
+      <% end %>
+      
       <td></td>
       <td></td>
+      
     </table>
 
     <%= link_to image_tag("basket_add.png",

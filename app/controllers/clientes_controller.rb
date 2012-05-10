@@ -20,7 +20,6 @@ class ClientesController < ApplicationController
 
   def create
     @cliente = Cliente.new(params[:cliente])
-    
     respond_to do |format|
       if @cliente.save
         format.html {redirect_to @cliente, :notice => 'Seus dados foram salvos com sucesso!'}

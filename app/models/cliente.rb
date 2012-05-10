@@ -3,12 +3,14 @@ require 'digest/sha2'
   
 class Cliente < ActiveRecord::Base
 
+  has_many :pedido
+
   # O método attr_accessor fornece uma alternativa mais curta, que usar os 
   # métodos attr_reader e attr_writer.
   attr_accessor :senha_confirmation
 
   # Definindo o método que deverá ser executado antes de salvar o registro
-  before_save :criptografia_senha
+  before_save :criptografa_senha, :limpa_formato_cep
 
   # Validando os atributos únicos
   validates_uniqueness_of :cpf, :email, :message => ' já foi informado'  
@@ -26,7 +28,7 @@ class Cliente < ActiveRecord::Base
   :too_short => "Informe uma senha maior"
 
   # Utilizando expressões regulares para validar campos
-  validates_format_of :cpf, :with => %r{^(\d{3})\.(\d{3})-(\d{2})$}i,
+  validates_format_of :cpf, :with => %r{^(\d{3})\.(\d{3}).(\d{3})-(\d{2})$}i,
                       :message => 'O CPF deve ser digitado no formato: 999.999.99'
 
   validates_format_of :telefone, :with => %r{^\(\d{2}\)\d{4}-\d{4}$}i,
@@ -34,10 +36,17 @@ class Cliente < ActiveRecord::Base
 
   validates_format_of :email, :with => %r{^[A-Za-z0-9_.-]+@([A-Za-z0-9_]+\.)+[A-Za-z]{2,4}$}i,
                       :message => 'O e-mail informado é inválido'
+                      
+   validates_format_of :cep, :with => %r{^(\d{5})-(\d{3})$}i,
+                      :message => 'O CEP deve ser digitado no formato 99999-99'                      
 
   # Método para criptografar a senha com SHA
   def criptografa_senha
      self.senha = Digest::SHA256.hexdigest(senha)
+  end
+
+  def limpa_formato_cep
+    self.cep = cep[0..4] + cep[6..8]
   end
   
   

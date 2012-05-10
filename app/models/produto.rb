@@ -2,7 +2,10 @@ require 'paperclip'
 
 class Produto < ActiveRecord::Base
 
-belongs_to :grupo
+  has_many :itempedido
+    belongs_to :grupo
+
+  belongs_to :grupo
 
 
   def self.localizar_produto_para_venda

@@ -6,6 +6,7 @@ Florarails::Application.routes.draw do
   resources :produtos
   resources :grupos
   
+  
   # não deve haver dois matchs apontando a mesma rota
   # match 'catalogo' => 'catalogo#detalhes'
   # sugestão 
@@ -18,7 +19,11 @@ Florarails::Application.routes.draw do
   match 'catalogo/procurar' => 'catalogo#procurar'
   match 'catalogo/lista_itens_grupo' => 'catalogo#lista_itens_grupo'
   match 'clientes/new' => 'clientes#new'
-
+  match 'pedidos/fechar_pedido' => 'pedidos#fechar_pedido'
+  match 'acessos/login' => 'acessos#login'
+  match 'acessos/logout' => 'acessos#logout'
+  match 'catalogo/salva_pedido' => 'catalogo#salva_pedido'
+  
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

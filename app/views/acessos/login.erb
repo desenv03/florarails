@@ -1,0 +1,32 @@
+<%= form_for :cliente, :url => {:action => :login} do |form| %>
+  
+  <fieldset>
+  
+    <legend> Identificação do usuário </legend>
+    
+    <table>
+      
+      <tr>
+        <td>
+          <%= form.label :email, "E-mail:" %>
+          <%= form.text_field :email, :size => 40 %> 
+        </td>
+      </tr>
+      
+      <tr>
+        <td>
+          <%= form.label :senha, "Senha:" %>
+          <%= form.password_field :senha, :size => 40 %>
+        </td>
+      </tr>
+    
+    </table>
+    
+  </fieldset>
+  
+  <%= submit_tag "Login", :class => "login" %>
+  
+  <%= link_to "Ainda não é nosso cliente?", :controller => :clientes,
+                                            :action => :new %>
+
+<% end %>                                        

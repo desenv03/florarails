@@ -1,0 +1,46 @@
+<%= form_for :pedido, :url => {:controller => :catalogo,
+                              :action => :salva_pedido} do |form| %>
+                                
+  <fieldset>
+    <legend> Informações do seu pedido </legend>
+    
+  <table>
+      
+     <%= form.hidden_field :cliente_id,
+                           :value => session[:cliente_id] %>
+     <%= form.hidden_field :emissao,
+                           :value => Date.current %>
+    <tr>
+      <td>
+         Nome: <br><%= text_field_tag 'nome',
+                       session[:cliente_nome],
+                       :disabled => true,
+                       :size => 35 %>     
+        <%= link_to "Outro Usuário?", :controller => :acessos,
+                                      :action => :logout %>
+      </td>
+    </tr>
+      
+    <tr>
+      <td>
+        Observação: <br><%= form.text_area :observacao,
+                                           :rows => 2,
+                                           :cols => 40 %>
+      </td>
+   </tr>
+      
+   <tr>
+      <td>
+          Tipo de pagamento: <br><%= form.select :tipo_pagamento,                                                                              
+                                                 Pedido::TIPOS_PAGAMENTO,
+                                                 :prompt => "Selecione um tipo de pagamento" %>
+      </td>
+   </tr>
+      
+ </table>
+    
+</fieldset> 
+  
+  <%= submit_tag "Salvar Pedido" %>
+  
+<% end %>                                                 

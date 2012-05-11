@@ -9,12 +9,12 @@ class AcessosController < ApplicationController
     def login
       if request.get?
         session[:cliente_id] = nil
-        session[:cliente_nome] =nil
+        session[:cliente_nome] = nil
         @cliente = Cliente.new
       else
         @cliente = Cliente.new(params[:cliente])
         dados =Cliente.find(:first, :conditions =>["email = ? and senha = ?",
-                            @cliente.email, Digest::SHA256.hexadigest(@cliente.senha)])
+                            @cliente.email, Digest::SHA256.hexdigest(@cliente.senha)])
           if dados
             session[:cliente_id] = dados.id
             session[:cliente_nome] = dados.nome
@@ -30,7 +30,7 @@ class AcessosController < ApplicationController
     def logout
       #Iremos definir nil(nulo) para os registros
       session[:cliente_id] = nil
-      session[:cliente_nome] nil
+      session[:cliente_nome] = nil
       redirect_to(:controller => :acessos,
                   :action => :login)
     end

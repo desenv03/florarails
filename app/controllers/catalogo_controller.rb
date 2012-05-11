@@ -65,7 +65,22 @@ class CatalogoController < ApplicationController
     @grupo = Grupo.find(params[:grupo])
   end
   
- 
+  
+  def salva_pedido
+    @carrinho = localiza_carrinho
+    @pedido = Pedido.new(params[:pedido])
+    @pedido.adiciona_item_carrinho(@carrinho)
+    if @pedido.save
+      session[:carrinho] = nil
+      flash[:info] = "Sua compra foi finalizada! O número do seu pedido é " + 
+                      @pedido.id.to_s
+      redirect_to(:controller => :catalogo, :action => :index)
+    else
+      render :action => :fechar_pedido
+    end
+  end
+  
+  
   # private significa que o método é acessivel somente
   # quando chamado com um receptor especifico
   private
@@ -75,7 +90,8 @@ class CatalogoController < ApplicationController
   # session[:carrinho] ||= Carrinho.new: caso possua um valor
   # correspondente a chave carrinho, o valor é retornado, senão
   # uma nova instancia de carrinho é criada e então retornada.
+  
 
-
-
+  
+  
 end

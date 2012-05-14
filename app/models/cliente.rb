@@ -3,8 +3,8 @@ require 'digest/sha2'
   
 class Cliente < ActiveRecord::Base
 
-  has_many :Pedidos
-  accepts_nested_attributes_for :Pedidos
+  has_many :pedido
+  accepts_nested_attributes_for :pedido
   
   # O método attr_accessor fornece uma alternativa mais curta, que usar os 
   # métodos attr_reader e attr_writer.

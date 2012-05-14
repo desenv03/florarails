@@ -29,7 +29,7 @@
     
    
     
-      <%= for pedido in @cliente.pedidos %>
+      <%= @cliente.pedido.each do |pedido| %>
       
         
           <td>
@@ -55,5 +55,4 @@
     
   </fieldset>
   
-<% end %>
-      
+<% end %>  

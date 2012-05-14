@@ -18,7 +18,6 @@ Florarails::Application.routes.draw do
   match 'catalogo/remover_do_carrinho/:id' => 'catalogo#remover_do_carrinho'
   match 'catalogo/procurar' => 'catalogo#procurar'
   match 'catalogo/lista_itens_grupo' => 'catalogo#lista_itens_grupo'
-  match 'clientes/new' => 'clientes#new'
   match 'pedidos/fechar_pedido' => 'pedidos#fechar_pedido'
   match 'acessos/login' => 'acessos#login'
   match 'acessos/logout' => 'acessos#logout'

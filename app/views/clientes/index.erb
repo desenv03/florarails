@@ -1,0 +1,59 @@
+<h1> Listagem dos clientes </h1>
+
+<table>
+  
+  <tr>
+    <th>Id</th>
+    <th>Nome</th>
+    <th>e-mail</th>
+    <th>Cidade</th>
+    <th>Endereço</th>
+    <th>Edição</th>
+  </tr>
+  
+  <%= for cliente in @clientes %>
+  
+    <tr>
+      <td>
+        <%=h cliente.id %>
+      </td>
+      <td<
+        <%=h cliente.nome %>
+      </td>
+      <td>
+        <%=h cliente.email %>
+      </td>
+      <td>
+        <%=h cliente.cidade + '/' + cliente.uf %>
+      </td>
+      <td>
+        <%=h cliente.logradouro %>
+      </td>
+      <td>
+        <%= link_to image_tag("pencil_go.png",
+                    :border => 0,
+                    :title => "Exibir") %>
+        <%= link_to image_tag("pencil.png",
+                    :border => 0,
+                    :title => "Editar"),
+                     edit_cliente_path(cliente) %>
+        <%= link_to  image_tag("pencil_delete.png",
+                     :border => 0,
+                     :title => "Apagar",
+                     :confirm => "Você tem certeza que deseja apagar o cliente?",
+                     :method => :delet %>
+      </td>
+    </tr>
+
+  <% end %>
+
+</table>
+
+<br/>
+
+<%= link_to image_tag("pencil_add.png",
+            :border => 0,
+            :title => "Adicionar cliente"),
+            new_cliente_path %>
+<%= link_to 'Novo Cliente', new_cliente_path %>
+            

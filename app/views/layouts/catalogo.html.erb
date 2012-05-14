@@ -45,17 +45,24 @@
         </div>
         
         <li> 
-          <a href="#a"> Inicio </a> 
+          <%= link_to "Home", 
+              :controller => "catalogo",
+              :action => "index" %>
         </li>
          <li> 
-          <a href="#b"> Login </a> 
+          <%= link_to "Login",
+              :controller => "acessos",
+              :action => "login" %> 
         </li>
          <li> 
-          <a href="#c"> Logout </a> 
+          <%= link_to "Logout",
+              :controller => "acessos",
+              :action => "logout" %>
         </li>
          <li> 
-          <a href="#d"> Contato </a> 
+          <a href = "malito:vendas@florarails.com.br?subject=Duvidas">Contato</a> 
         </li>
+        
       </div>
       <p>
         <div id = "corpo">

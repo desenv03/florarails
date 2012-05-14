@@ -1,0 +1,59 @@
+<h2>Cliente: <%= @cliente.nome %></h2>
+
+<%= form_for @cliente do |cliente_form| %>
+
+  <h4>
+    
+    <p>Código: <%= @cliente.id %></p>
+    <p>e-mail: <%=h @cliente.email %></p>
+    <p>CPF: <%=h @cliente.cpf %></p>
+    <p>Telefone: <%=h @cliente.telefone %></p>
+    <p>CEP: <%=h @cliente.cep %></p>
+    <p>Cidade: <%=h @cliente.cidade %></p>
+    <p>UF: <%=h @cliente.uf %></p>
+    <p>Endereço: <%=h @cliente.logradouro %></p>
+    <p>Complemento: <%=h @cliente.complemento %></p>
+    <p>Bairro: <%=h @cliente.bairro %></p>
+  
+  </h4>
+  
+  <fieldset>
+    
+    <legend>Histórico dos Pedidos</legend>
+    
+    <table>
+    
+      <td width=70 %> Nº de Pedidos </td>
+      <td width=42 %> Emissão </td>
+      <td width=30 %> Observação </td>
+    
+   
+    
+      <%= for pedido in @cliente.pedidos %>
+      
+        
+          <td>
+            <%= pedido_form.text_field :id,
+                                       :disabled => true,
+                                       :size => 5 %>
+          </td>
+          <td>
+            <%= pedido_form.text_field :emissao, 
+                                       :disabled => true,
+                                       :size => 10 %>
+          </td>
+          <td>
+            <%= pedido_form.text_field :observacao,
+                                       :disabled => true,
+                                       :size => 40 %>
+          </td>
+          
+        
+      <% end %>
+    
+    </table>
+    
+  </fieldset>
+  
+<% end %>
+      

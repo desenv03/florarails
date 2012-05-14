@@ -7,7 +7,19 @@ class ClientesController < ApplicationController
   # Ao invés de utilizarmos o layout padrão, vamos definir outro layout
   layout "catalogo"
 
-
+  def index
+    @clientes = Cliente.find(:all)
+  end
+  
+  
+  def destroy
+    @clientes = Cliente.find(params[:id])
+    @cliente.destroy
+    flash[:info] = "Cliente excluido com sucesso"
+    redirect_to(clientes_path)
+  end
+      
+  
   def show
     @cliente = Cliente.find(params[:id])
   end

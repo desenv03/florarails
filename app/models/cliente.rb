@@ -3,8 +3,9 @@ require 'digest/sha2'
   
 class Cliente < ActiveRecord::Base
 
-  has_many :pedido
-
+  has_many :Pedidos
+  accepts_nested_attributes_for :Pedidos
+  
   # O método attr_accessor fornece uma alternativa mais curta, que usar os 
   # métodos attr_reader e attr_writer.
   attr_accessor :senha_confirmation

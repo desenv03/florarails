@@ -1,0 +1,12 @@
+Prezado(a) <%= @pedido.cliente.nome %>:
+
+É um prazer atende-lo(a)!
+
+O seu pedido é o número: <%= @pedido.id %> emitido em
+<%= @pedido.emissao.strftime("%d/%m/%Y %H:%M") %> será entregue em até 5 dias uteis.
+
+Caso tenha alguma dúvida, entre em contato conosco através do email contato@florarails.com.br
+
+Atenciosamente,
+
+Floricultura FloraRails 

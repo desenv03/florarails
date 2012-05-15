@@ -71,6 +71,7 @@ class CatalogoController < ApplicationController
     @pedido = Pedido.new(params[:pedido])
     @pedido.adiciona_item_carrinho(@carrinho)
     if @pedido.save
+      AvisaCliente.email_cliente(@pedido).deliver
       session[:carrinho] = nil
       flash[:info] = "Sua compra foi finalizada! O número do seu pedido é " + 
                       @pedido.id.to_s

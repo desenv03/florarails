@@ -1,10 +1,10 @@
 class AvisaCliente < ActionMailer::Base
-  #default :from => "from@example.com"
-  def email_cliente(pedido)
-    recipients "#{pedido.cliente.email}"
-    from "vendas@florarails.com.br"
-    subject "Pedido nr" + "#{pedido.id}" + " confirmado com sucesso!"
-    body "pedido" => pedido
+  default :from => "lftecnologia.2010@gmail.com"
+  def email_cliente(ped)
+    @pedido = ped
+    cliente = @pedido.cliente
+    mail(:to => "#{cliente.nome} <#{cliente.email}>",
+         :subject => "Pedido número " + "#{@pedido.id}" + " confirmado com sucesso!")
   end
   
 end

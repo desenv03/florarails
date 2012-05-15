@@ -125,6 +125,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   jquery-rails
   json
+  mail (= 2.4.4)
   paperclip-cloudfiles
   pg
   rails (= 3.2.2)

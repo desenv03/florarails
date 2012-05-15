@@ -22,35 +22,33 @@
     <legend>Histórico dos Pedidos</legend>
     
     <table>
-    
-      <td width=70 %> Nº de Pedidos </td>
-      <td width=42 %> Emissão </td>
-      <td width=30 %> Observação </td>
-    
-   
-    
-      <%= @cliente.pedido.each do |pedido| %>
       
-        
-          <td>
-            <%= pedido_form.text_field :id,
-                                       :disabled => true,
-                                       :size => 5 %>
-          </td>
-          <td>
-            <%= pedido_form.text_field :emissao, 
-                                       :disabled => true,
-                                       :size => 10 %>
-          </td>
-          <td>
-            <%= pedido_form.text_field :observacao,
-                                       :disabled => true,
-                                       :size => 40 %>
-          </td>
-          
-        
-      <% end %>
+      <tr>
+      
+        <td width=80 %>Nº dos Pedidos</td>
+        <td width=90 %>Emissão</td>
+        <td width=280 %>Observação</td>
+      
+      </tr>
     
+        <% @cliente.pedido.each do |pedido| %>
+          
+           <tr>
+           
+            <td>
+              <%= pedido.id %>
+            </td>
+            <td>
+              <%= pedido.emissao %>
+            </td>
+            <td>
+              <%= pedido.observacao %>
+            </td>
+            
+           </tr>
+           
+        <% end %>
+      
     </table>
     
   </fieldset>

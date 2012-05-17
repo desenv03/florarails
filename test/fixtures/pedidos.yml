@@ -3,9 +3,15 @@
 # This model initially had no columns defined.  If you add columns to the
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+
+one: 
+  emissao: 2012-05-02
+  observacao: 
+  tipo_pagamento: bo
+  cliente_id: 1
+
+two: 
+  emissao: 2012-05-10
+  observacao: 
+  tipo_pagamento: tb
+  cliente_id: 2

@@ -1,13 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  titulo: MyString
-  descricao: MyText
-  preco: 9.99
-  validade: 2012-04-03
-
-two:
-  titulo: MyString
-  descricao: MyText
-  preco: 9.99
-  validade: 2012-04-03
+orquidea:
+  titulo: Orquidea Branca
+  descricao: Arranjo de orquidea branca
+  preco: 49.99
+  validade: 2013-04-03
+  grupo_id: 1
+  
+ursinho:
+  titulo: Urso Tedy
+  descricao: Urso de pelucia na cor marrom
+  preco: 19.99
+  validade: 2020-04-03
+  grupo_id: 2

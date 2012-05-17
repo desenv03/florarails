@@ -5,23 +5,23 @@ one:
   nome: MyString
   telefone: MyString
   cidade: MyString
-  uf: MyString
+  uf: My
   logradouro: MyString
   complemento: MyString
   bairro: MyString
   email: MyString
   senha: MyString
-  cpf: MyString
+  cpf: MyString1
 
 two:
   cep: 
   nome: MyString
   telefone: MyString
   cidade: MyString
-  uf: MyString
+  uf: My
   logradouro: MyString
   complemento: MyString
   bairro: MyString
   email: MyString
   senha: MyString
-  cpf: MyString
+  cpf: MyString2

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>check_for_url_clash (Paperclip::Helpers)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/paperclip/lib/paperclip/helpers.rb, line 58</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">check_for_url_clash</span>(<span class="ruby-identifier">name</span>,<span class="ruby-identifier">url</span>,<span class="ruby-identifier">klass</span>)
+      <span class="ruby-ivar">@names_url</span> <span class="ruby-operator">||=</span> {}
+      <span class="ruby-identifier">default_url</span> = <span class="ruby-identifier">url</span> <span class="ruby-operator">||</span> <span class="ruby-constant">Attachment</span>.<span class="ruby-identifier">default_options</span>[<span class="ruby-identifier">:url</span>]
+      <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@names_url</span>[<span class="ruby-identifier">name</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@names_url</span>[<span class="ruby-identifier">name</span>][<span class="ruby-identifier">:url</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">default_url</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@names_url</span>[<span class="ruby-identifier">name</span>][<span class="ruby-identifier">:class</span>] <span class="ruby-operator">!=</span> <span class="ruby-identifier">klass</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@names_url</span>[<span class="ruby-identifier">name</span>][<span class="ruby-identifier">:url</span>] <span class="ruby-operator">!~</span> <span class="ruby-regexp re">/:class/</span>
+        <span class="ruby-identifier">log</span>(<span class="ruby-node">&quot;Duplicate URL for #{name} with #{default_url}. This will clash with attachment defined in #{@names_url[name][:class]} class&quot;</span>)
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-ivar">@names_url</span>[<span class="ruby-identifier">name</span>] = {<span class="ruby-identifier">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">default_url</span>, <span class="ruby-identifier">:class</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">klass</span>}
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

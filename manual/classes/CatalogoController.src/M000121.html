@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>salva_pedido (CatalogoController)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File app/controllers/catalogo_controller.rb, line 69</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">salva_pedido</span>
+    <span class="ruby-ivar">@carrinho</span> = <span class="ruby-identifier">localiza_carrinho</span>
+    <span class="ruby-ivar">@pedido</span> = <span class="ruby-constant">Pedido</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:pedido</span>])
+    <span class="ruby-ivar">@pedido</span>.<span class="ruby-identifier">adiciona_item_carrinho</span>(<span class="ruby-ivar">@carrinho</span>)
+    <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@pedido</span>.<span class="ruby-identifier">save</span>
+      <span class="ruby-constant">AvisaCliente</span>.<span class="ruby-identifier">email_cliente</span>(<span class="ruby-ivar">@pedido</span>).<span class="ruby-identifier">deliver</span>
+      <span class="ruby-identifier">session</span>[<span class="ruby-identifier">:carrinho</span>] = <span class="ruby-keyword kw">nil</span>
+      <span class="ruby-identifier">flash</span>[<span class="ruby-identifier">:info</span>] = <span class="ruby-value str">&quot;Sua compra foi finalizada! O número do seu pedido é &quot;</span> <span class="ruby-operator">+</span> 
+                      <span class="ruby-ivar">@pedido</span>.<span class="ruby-identifier">id</span>.<span class="ruby-identifier">to_s</span>
+      <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:catalogo</span>, <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:index</span>)
+    <span class="ruby-keyword kw">else</span>
+      <span class="ruby-identifier">render</span> <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:fechar_pedido</span>
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

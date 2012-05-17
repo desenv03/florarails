@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>selector_for (HtmlSelectorsHelpers)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/paperclip/features/support/selectors.rb, line 8</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">selector_for</span>(<span class="ruby-identifier">locator</span>)
+    <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">locator</span>
+    <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;the page&quot;</span>
+      <span class="ruby-value str">&quot;html &gt; body&quot;</span>
+    <span class="ruby-keyword kw">else</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Can't find mapping from \&quot;#{locator}\&quot; to a selector.\n&quot;</span> <span class="ruby-operator">+</span>
+        <span class="ruby-node">&quot;Now, go and add a mapping in #{__FILE__}&quot;</span>
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

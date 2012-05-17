@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>from_file (Paperclip::Geometry)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/paperclip/lib/paperclip/geometry.rb, line 18</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">from_file</span> <span class="ruby-identifier">file</span>
+      <span class="ruby-identifier">file_path</span> = <span class="ruby-identifier">file</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:path</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">file</span>.<span class="ruby-identifier">path</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">file</span>
+      <span class="ruby-identifier">raise</span>(<span class="ruby-constant">Errors</span><span class="ruby-operator">::</span><span class="ruby-constant">NotIdentifiedByImageMagickError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;Cannot find the geometry of a file with a blank name&quot;</span>)) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">file_path</span>.<span class="ruby-identifier">blank?</span>
+      <span class="ruby-identifier">geometry</span> = <span class="ruby-keyword kw">begin</span>
+                   <span class="ruby-identifier">silence_stream</span>(<span class="ruby-constant">STDERR</span>) <span class="ruby-keyword kw">do</span>
+                     <span class="ruby-constant">Paperclip</span>.<span class="ruby-identifier">run</span>(<span class="ruby-value str">&quot;identify&quot;</span>, <span class="ruby-value str">&quot;-format %wx%h :file&quot;</span>, <span class="ruby-identifier">:file</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{file_path}[0]&quot;</span>)
+                   <span class="ruby-keyword kw">end</span>
+                 <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Cocaine</span><span class="ruby-operator">::</span><span class="ruby-constant">ExitStatusError</span>
+                   <span class="ruby-value str">&quot;&quot;</span>
+                 <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Cocaine</span><span class="ruby-operator">::</span><span class="ruby-constant">CommandNotFoundError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+                   <span class="ruby-identifier">raise</span> <span class="ruby-constant">Errors</span><span class="ruby-operator">::</span><span class="ruby-constant">CommandNotFoundError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;Could not run the `identify` command. Please install ImageMagick.&quot;</span>)
+                 <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">parse</span>(<span class="ruby-identifier">geometry</span>) <span class="ruby-operator">||</span>
+        <span class="ruby-identifier">raise</span>(<span class="ruby-constant">Errors</span><span class="ruby-operator">::</span><span class="ruby-constant">NotIdentifiedByImageMagickError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{file_path} is not recognized by the 'identify' command.&quot;</span>))
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -16,7 +16,7 @@ class ProdutoTest < ActiveSupport::TestCase
   test "novo_produto_certo" do
     produto = Produto.create(:titulo => "Rosa",
                              :descricao => "Rosa branca",
-                             :imagem => "rosa.jpg",
+                             #:imagem => "rosa.jpg",
                              :preco => 14.99,
                              :validade => "2012-12-31",
                              :grupo_id => 1)

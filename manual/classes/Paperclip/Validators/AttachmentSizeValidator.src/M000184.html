@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>validate_each (Paperclip::Validators::AttachmentSizeValidator)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/paperclip/lib/paperclip/validators/attachment_size_validator.rb, line 13</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate_each</span>(<span class="ruby-identifier">record</span>, <span class="ruby-identifier">attr_name</span>, <span class="ruby-identifier">value</span>)
+        <span class="ruby-identifier">attr_name</span> = <span class="ruby-node">&quot;#{attr_name}_file_size&quot;</span>.<span class="ruby-identifier">to_sym</span>
+        <span class="ruby-identifier">value</span> = <span class="ruby-identifier">record</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:read_attribute_for_validation</span>, <span class="ruby-identifier">attr_name</span>)
+
+        <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">blank?</span>
+          <span class="ruby-identifier">options</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-operator">*</span><span class="ruby-constant">AVAILABLE_CHECKS</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">option</span>, <span class="ruby-identifier">option_value</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">option_value</span> = <span class="ruby-identifier">option_value</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">record</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">option_value</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Proc</span>)
+            <span class="ruby-identifier">option_value</span> = <span class="ruby-identifier">extract_option_value</span>(<span class="ruby-identifier">option</span>, <span class="ruby-identifier">option_value</span>)
+
+            <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">send</span>(<span class="ruby-constant">CHECKS</span>[<span class="ruby-identifier">option</span>], <span class="ruby-identifier">option_value</span>)
+              <span class="ruby-identifier">error_message_key</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:in</span>] <span class="ruby-operator">?</span> <span class="ruby-identifier">:in_between</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">option</span>
+              <span class="ruby-identifier">record</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">attr_name</span>, <span class="ruby-identifier">error_message_key</span>, <span class="ruby-identifier">filtered_options</span>(<span class="ruby-identifier">value</span>).<span class="ruby-identifier">merge</span>(
+                <span class="ruby-identifier">:min</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">min_value_in_human_size</span>(<span class="ruby-identifier">record</span>),
+                <span class="ruby-identifier">:max</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">max_value_in_human_size</span>(<span class="ruby-identifier">record</span>),
+                <span class="ruby-identifier">:count</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">human_size</span>(<span class="ruby-identifier">option_value</span>)
+              ))
+            <span class="ruby-keyword kw">end</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

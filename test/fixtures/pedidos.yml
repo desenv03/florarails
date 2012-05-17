@@ -4,13 +4,13 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 
-one: 
+ped1: 
   emissao: 2012-05-02
   observacao: 
   tipo_pagamento: bo
   cliente_id: 1
 
-two: 
+ped2: 
   emissao: 2012-05-10
   observacao: 
   tipo_pagamento: tb

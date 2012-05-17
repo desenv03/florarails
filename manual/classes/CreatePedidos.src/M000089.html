@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>up (CreatePedidos)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File db/migrate/20120510163919_create_pedidos.rb, line 3</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">up</span>
+    <span class="ruby-identifier">create_table</span> <span class="ruby-identifier">:pedidos</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">t</span>.<span class="ruby-identifier">date</span> <span class="ruby-identifier">:emissao</span>
+      <span class="ruby-identifier">t</span>.<span class="ruby-identifier">string</span> <span class="ruby-identifier">:observacao</span>, <span class="ruby-identifier">:limit</span> =<span class="ruby-operator">&gt;</span><span class="ruby-value">50</span>
+      <span class="ruby-identifier">t</span>.<span class="ruby-identifier">string</span> <span class="ruby-identifier">:tipo_pagamento</span>, <span class="ruby-identifier">:limit</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">10</span>
+      <span class="ruby-identifier">t</span>.<span class="ruby-identifier">integer</span> <span class="ruby-identifier">:cliente_id</span>, <span class="ruby-identifier">:null</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>, <span class="ruby-identifier">:options</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;CONSTRAINT flo_fk_ped_cli REFERENCES clientes(id)&quot;</span>
+      <span class="ruby-identifier">t</span>.<span class="ruby-identifier">timestamps</span>
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

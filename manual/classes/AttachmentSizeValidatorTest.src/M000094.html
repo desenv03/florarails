@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>should_not_allow_attachment_file_size (AttachmentSizeValidatorTest)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/paperclip/test/validators/attachment_size_validator_test.rb, line 26</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">should_not_allow_attachment_file_size</span>(<span class="ruby-identifier">size</span>, <span class="ruby-identifier">options</span> = {})
+    <span class="ruby-identifier">context</span> <span class="ruby-node">&quot;when the attachment size is #{size}&quot;</span> <span class="ruby-keyword kw">do</span>
+      <span class="ruby-identifier">setup</span> <span class="ruby-keyword kw">do</span>
+        <span class="ruby-ivar">@dummy</span>.<span class="ruby-identifier">stubs</span>(<span class="ruby-identifier">:avatar_file_size</span>).<span class="ruby-identifier">returns</span>(<span class="ruby-identifier">size</span>)
+        <span class="ruby-ivar">@validator</span>.<span class="ruby-identifier">validate</span>(<span class="ruby-ivar">@dummy</span>)
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-identifier">should</span> <span class="ruby-value str">&quot;add error to dummy object&quot;</span> <span class="ruby-keyword kw">do</span>
+        <span class="ruby-identifier">assert</span> <span class="ruby-ivar">@dummy</span>.<span class="ruby-identifier">errors</span>[<span class="ruby-identifier">:avatar_file_size</span>].<span class="ruby-identifier">present?</span>,
+          <span class="ruby-value str">&quot;Unexpected error message on :avatar_file_size&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:message</span>]
+        <span class="ruby-identifier">should</span> <span class="ruby-value str">&quot;return a correct error message&quot;</span> <span class="ruby-keyword kw">do</span>
+          <span class="ruby-identifier">assert_includes</span> <span class="ruby-ivar">@dummy</span>.<span class="ruby-identifier">errors</span>[<span class="ruby-identifier">:avatar_file_size</span>], <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:message</span>]
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

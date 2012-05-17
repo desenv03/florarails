@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>flush_writes (Paperclip::Storage::Fog)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/paperclip/lib/paperclip/storage/fog.rb, line 77</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">flush_writes</span>
+        <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">style</span>, <span class="ruby-identifier">file</span> <span class="ruby-keyword kw">in</span> <span class="ruby-ivar">@queued_for_write</span> <span class="ruby-keyword kw">do</span>
+          <span class="ruby-identifier">log</span>(<span class="ruby-node">&quot;saving #{path(style)}&quot;</span>)
+          <span class="ruby-identifier">retried</span> = <span class="ruby-keyword kw">false</span>
+          <span class="ruby-keyword kw">begin</span>
+            <span class="ruby-identifier">directory</span>.<span class="ruby-identifier">files</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">fog_file</span>.<span class="ruby-identifier">merge</span>(
+              <span class="ruby-identifier">:body</span>         =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">file</span>,
+              <span class="ruby-identifier">:key</span>          =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">path</span>(<span class="ruby-identifier">style</span>),
+              <span class="ruby-identifier">:public</span>       =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">fog_public</span>,
+              <span class="ruby-identifier">:content_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">file</span>.<span class="ruby-identifier">content_type</span>
+            ))
+          <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Excon</span><span class="ruby-operator">::</span><span class="ruby-constant">Errors</span><span class="ruby-operator">::</span><span class="ruby-constant">NotFound</span>
+            <span class="ruby-identifier">raise</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">retried</span>
+            <span class="ruby-identifier">retried</span> = <span class="ruby-keyword kw">true</span>
+            <span class="ruby-identifier">directory</span>.<span class="ruby-identifier">save</span>
+            <span class="ruby-keyword kw">retry</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-identifier">after_flush_writes</span> <span class="ruby-comment cmt"># allows attachment to clean up temp files</span>
+
+        <span class="ruby-ivar">@queued_for_write</span> = {}
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>default_options (Paperclip::Attachment)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/paperclip/lib/paperclip/attachment.rb, line 10</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">default_options</span>
+      <span class="ruby-ivar">@default_options</span> <span class="ruby-operator">||=</span> {
+        <span class="ruby-identifier">:convert_options</span>       =<span class="ruby-operator">&gt;</span> {},
+        <span class="ruby-identifier">:default_style</span>         =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:original</span>,
+        <span class="ruby-identifier">:default_url</span>           =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;/:attachment/:style/missing.png&quot;</span>,
+        <span class="ruby-identifier">:restricted_characters</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-regexp re">/[&amp;$+,\/:;=?@&lt;&gt;\[\]\{\}\|\\\^~%# ]/</span>,
+        <span class="ruby-identifier">:hash_data</span>             =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;:class/:attachment/:id/:style/:updated_at&quot;</span>,
+        <span class="ruby-identifier">:hash_digest</span>           =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;SHA1&quot;</span>,
+        <span class="ruby-identifier">:interpolator</span>          =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Paperclip</span><span class="ruby-operator">::</span><span class="ruby-constant">Interpolations</span>,
+        <span class="ruby-identifier">:only_process</span>          =<span class="ruby-operator">&gt;</span> [],
+        <span class="ruby-identifier">:path</span>                  =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;:rails_root/public:url&quot;</span>,
+        <span class="ruby-identifier">:preserve_files</span>        =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>,
+        <span class="ruby-identifier">:processors</span>            =<span class="ruby-operator">&gt;</span> [<span class="ruby-identifier">:thumbnail</span>],
+        <span class="ruby-identifier">:source_file_options</span>   =<span class="ruby-operator">&gt;</span> {},
+        <span class="ruby-identifier">:storage</span>               =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:filesystem</span>,
+        <span class="ruby-identifier">:styles</span>                =<span class="ruby-operator">&gt;</span> {},
+        <span class="ruby-identifier">:url</span>                   =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;/system/:class/:attachment/:id_partition/:style/:filename&quot;</span>,
+        <span class="ruby-identifier">:url_generator</span>         =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Paperclip</span><span class="ruby-operator">::</span><span class="ruby-constant">UrlGenerator</span>,
+        <span class="ruby-identifier">:use_default_time_zone</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>,
+        <span class="ruby-identifier">:use_timestamp</span>         =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>,
+        <span class="ruby-identifier">:whiny</span>                 =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Paperclip</span>.<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:whiny</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">Paperclip</span>.<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:whiny_thumbnails</span>]
+      }
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

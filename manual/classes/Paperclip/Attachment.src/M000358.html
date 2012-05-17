@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>assign (Paperclip::Attachment)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/paperclip/lib/paperclip/attachment.rb, line 89</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">assign</span> <span class="ruby-identifier">uploaded_file</span>
+      <span class="ruby-identifier">ensure_required_accessors!</span>
+      <span class="ruby-identifier">file</span> = <span class="ruby-constant">Paperclip</span>.<span class="ruby-identifier">io_adapters</span>.<span class="ruby-identifier">for</span>(<span class="ruby-identifier">uploaded_file</span>)
+
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">clear</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">file</span>.<span class="ruby-identifier">nil?</span>
+
+      <span class="ruby-ivar">@queued_for_write</span>[<span class="ruby-identifier">:original</span>]   = <span class="ruby-identifier">file</span>
+      <span class="ruby-identifier">instance_write</span>(<span class="ruby-identifier">:file_name</span>,       <span class="ruby-identifier">cleanup_filename</span>(<span class="ruby-identifier">file</span>.<span class="ruby-identifier">original_filename</span>))
+      <span class="ruby-identifier">instance_write</span>(<span class="ruby-identifier">:content_type</span>,    <span class="ruby-identifier">file</span>.<span class="ruby-identifier">content_type</span>)
+      <span class="ruby-identifier">instance_write</span>(<span class="ruby-identifier">:file_size</span>,       <span class="ruby-identifier">file</span>.<span class="ruby-identifier">size</span>)
+      <span class="ruby-identifier">instance_write</span>(<span class="ruby-identifier">:fingerprint</span>,     <span class="ruby-identifier">file</span>.<span class="ruby-identifier">fingerprint</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">instance_respond_to?</span>(<span class="ruby-identifier">:fingerprint</span>)
+      <span class="ruby-identifier">instance_write</span>(<span class="ruby-identifier">:updated_at</span>,      <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>)
+
+      <span class="ruby-ivar">@dirty</span> = <span class="ruby-keyword kw">true</span>
+
+      <span class="ruby-identifier">post_process</span>(<span class="ruby-operator">*</span><span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:only_process</span>]) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">post_processing</span>
+
+      <span class="ruby-comment cmt"># Reset the file size if the original file was reprocessed.</span>
+      <span class="ruby-identifier">instance_write</span>(<span class="ruby-identifier">:file_size</span>,   <span class="ruby-ivar">@queued_for_write</span>[<span class="ruby-identifier">:original</span>].<span class="ruby-identifier">size</span>)
+      <span class="ruby-identifier">instance_write</span>(<span class="ruby-identifier">:fingerprint</span>, <span class="ruby-ivar">@queued_for_write</span>[<span class="ruby-identifier">:original</span>].<span class="ruby-identifier">fingerprint</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">instance_respond_to?</span>(<span class="ruby-identifier">:fingerprint</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

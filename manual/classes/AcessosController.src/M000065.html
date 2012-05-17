@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>login (AcessosController)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File app/controllers/acessos_controller.rb, line 9</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">login</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">get?</span>
+        <span class="ruby-identifier">session</span>[<span class="ruby-identifier">:cliente_id</span>] = <span class="ruby-keyword kw">nil</span>
+        <span class="ruby-identifier">session</span>[<span class="ruby-identifier">:cliente_nome</span>] = <span class="ruby-keyword kw">nil</span>
+        <span class="ruby-ivar">@cliente</span> = <span class="ruby-constant">Cliente</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-ivar">@cliente</span> = <span class="ruby-constant">Cliente</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:cliente</span>])
+        <span class="ruby-identifier">dados</span> =<span class="ruby-constant">Cliente</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:first</span>, <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span>[<span class="ruby-value str">&quot;email = ? and senha = ?&quot;</span>,
+                            <span class="ruby-ivar">@cliente</span>.<span class="ruby-identifier">email</span>, <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-ivar">@cliente</span>.<span class="ruby-identifier">senha</span>)])
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">dados</span>
+            <span class="ruby-identifier">session</span>[<span class="ruby-identifier">:cliente_id</span>] = <span class="ruby-identifier">dados</span>.<span class="ruby-identifier">id</span>
+            <span class="ruby-identifier">session</span>[<span class="ruby-identifier">:cliente_nome</span>] = <span class="ruby-identifier">dados</span>.<span class="ruby-identifier">nome</span>
+            <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:pedidos</span>,
+                        <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:fechar_pedido</span>)
+          <span class="ruby-keyword kw">else</span>
+            <span class="ruby-identifier">flash</span>[<span class="ruby-identifier">:erro</span>] = <span class="ruby-value str">&quot;Dados inválidos! Faça um novo login&quot;</span>
+          <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

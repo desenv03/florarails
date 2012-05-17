@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>hash_key (Paperclip::Attachment)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/paperclip/lib/paperclip/attachment.rb, line 265</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">hash_key</span>(<span class="ruby-identifier">style_name</span> = <span class="ruby-identifier">default_style</span>)
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-value str">&quot;Unable to generate hash without :hash_secret&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:hash_secret</span>]
+      <span class="ruby-identifier">require</span> <span class="ruby-value str">'openssl'</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-keyword kw">defined?</span>(<span class="ruby-constant">OpenSSL</span>)
+      <span class="ruby-identifier">data</span> = <span class="ruby-identifier">interpolate</span>(<span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:hash_data</span>], <span class="ruby-identifier">style_name</span>)
+      <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">HMAC</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">Digest</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:hash_digest</span>]).<span class="ruby-identifier">new</span>, <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:hash_secret</span>], <span class="ruby-identifier">data</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

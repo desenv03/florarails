@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>class_for (Paperclip::Helpers)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/paperclip/lib/paperclip/helpers.rb, line 43</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">class_for</span>(<span class="ruby-identifier">class_name</span>)
+      <span class="ruby-comment cmt"># Ruby 1.9 introduces an inherit argument for Module#const_get and</span>
+      <span class="ruby-comment cmt"># #const_defined? and changes their default behavior.</span>
+      <span class="ruby-comment cmt"># https://github.com/rails/rails/blob/v3.0.9/activesupport/lib/active_support/inflector/methods.rb#L89</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Module</span>.<span class="ruby-identifier">method</span>(<span class="ruby-identifier">:const_get</span>).<span class="ruby-identifier">arity</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+        <span class="ruby-identifier">class_name</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">'::'</span>).<span class="ruby-identifier">inject</span>(<span class="ruby-constant">Object</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">klass</span>, <span class="ruby-identifier">partial_class_name</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">const_defined?</span>(<span class="ruby-identifier">partial_class_name</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">partial_class_name</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">const_missing</span>(<span class="ruby-identifier">partial_class_name</span>)
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">class_name</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">'::'</span>).<span class="ruby-identifier">inject</span>(<span class="ruby-constant">Object</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">klass</span>, <span class="ruby-identifier">partial_class_name</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">const_defined?</span>(<span class="ruby-identifier">partial_class_name</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">partial_class_name</span>, <span class="ruby-keyword kw">false</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">const_missing</span>(<span class="ruby-identifier">partial_class_name</span>)
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

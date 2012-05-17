@@ -1,0 +1,801 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Paperclip::Attachment</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Paperclip::Attachment</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/vendor/plugins/paperclip/lib/paperclip/attachment_rb.html">
+                vendor/plugins/paperclip/lib/paperclip/attachment.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Object
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+The <a href="Attachment.html">Attachment</a> class manages the files for a
+given attachment. It saves when the model saves, deletes when the model is
+destroyed, and processes the file upon assignment.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000358">assign</a>&nbsp;&nbsp;
+      <a href="#M000368">clear</a>&nbsp;&nbsp;
+      <a href="#M000374">content_type</a>&nbsp;&nbsp;
+      <a href="#M000356">default_options</a>&nbsp;&nbsp;
+      <a href="#M000362">default_style</a>&nbsp;&nbsp;
+      <a href="#M000369">destroy</a>&nbsp;&nbsp;
+      <a href="#M000366">dirty?</a>&nbsp;&nbsp;
+      <a href="#M000365">errors</a>&nbsp;&nbsp;
+      <a href="#M000379">file?</a>&nbsp;&nbsp;
+      <a href="#M000373">fingerprint</a>&nbsp;&nbsp;
+      <a href="#M000377">hash_key</a>&nbsp;&nbsp;
+      <a href="#M000383">instance_read</a>&nbsp;&nbsp;
+      <a href="#M000381">instance_respond_to?</a>&nbsp;&nbsp;
+      <a href="#M000382">instance_write</a>&nbsp;&nbsp;
+      <a href="#M000357">new</a>&nbsp;&nbsp;
+      <a href="#M000371">original_filename</a>&nbsp;&nbsp;
+      <a href="#M000360">path</a>&nbsp;&nbsp;
+      <a href="#M000380">present?</a>&nbsp;&nbsp;
+      <a href="#M000364">processors</a>&nbsp;&nbsp;
+      <a href="#M000378">reprocess!</a>&nbsp;&nbsp;
+      <a href="#M000367">save</a>&nbsp;&nbsp;
+      <a href="#M000372">size</a>&nbsp;&nbsp;
+      <a href="#M000363">styles</a>&nbsp;&nbsp;
+      <a href="#M000376">time_zone</a>&nbsp;&nbsp;
+      <a href="#M000361">to_s</a>&nbsp;&nbsp;
+      <a href="#M000375">updated_at</a>&nbsp;&nbsp;
+      <a href="#M000370">uploaded_file</a>&nbsp;&nbsp;
+      <a href="#M000359">url</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">convert_options</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">default_style</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">instance</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">interpolator</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">name</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">options</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">post_processing</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">queued_for_write</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">source_file_options</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">whiny</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">whiny</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000356" class="method-detail">
+        <a name="M000356"></a>
+
+        <div class="method-heading">
+          <a href="Attachment.src/M000356.html" target="Code" class="method-signature"
+            onclick="popupCode('Attachment.src/M000356.html');return false;">
+          <span class="method-name">default_options</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000357" class="method-detail">
+        <a name="M000357"></a>
+
+        <div class="method-heading">
+          <a href="Attachment.src/M000357.html" target="Code" class="method-signature"
+            onclick="popupCode('Attachment.src/M000357.html');return false;">
+          <span class="method-name">new</span><span class="method-args">(name, instance, options = {})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Creates an <a href="Attachment.html">Attachment</a> object. <tt>name</tt>
+is the name of the attachment, <tt>instance</tt> is the ActiveRecord object
+instance it&#8216;s attached to, and <tt>options</tt> is the same as the
+hash passed to <tt>has_attached_file</tt>.
+</p>
+<p>
+Options include:
+</p>
+<p>
+<tt><a href="Attachment.html#M000359">url</a></tt> - a relative URL of the
+attachment. This is interpolated using <tt>interpolator</tt> <tt><a
+href="Attachment.html#M000360">path</a></tt> - where on the filesystem to
+store the attachment. This is interpolated using <tt>interpolator</tt>
+<tt><a href="Attachment.html#M000363">styles</a></tt> - a hash of options
+for processing the attachment. See <tt>has_attached_file</tt> for the
+details <tt>only_process</tt> - style args to be run through the
+post-processor. This defaults to the empty list <tt>default_url</tt> - a
+URL for the missing image <tt><a
+href="Attachment.html#M000362">default_style</a></tt> - the style to use
+when don&#8216;t specify an argument to e.g. <a
+href="Attachment.html#M000359">url</a>, <a
+href="Attachment.html#M000360">path</a> <tt>storage</tt> - the storage
+mechanism. Defaults to :filesystem <tt>use_timestamp</tt> - whether to
+append an anti-caching timestamp to image URLs. Defaults to true
+<tt>whiny</tt>, <tt>whiny_thumbnails</tt> - whether to raise when
+thumbnailing fails <tt>use_default_time_zone</tt> - related to
+<tt>use_timestamp</tt>. Defaults to true <tt>hash_digest</tt> - a string
+representing a class that will be used to hash URLs for obfuscation
+<tt>hash_data</tt> - the relative URL for the hash data. This is
+interpolated using <tt>interpolator</tt> <tt>hash_secret</tt> - a secret
+passed to the <tt>hash_digest</tt> <tt>convert_options</tt> - flags passed
+to the <tt>convert</tt> command for processing <tt>source_file_options</tt>
+- flags passed to the <tt>convert</tt> command that controls how the file
+is read <tt><a href="Attachment.html#M000364">processors</a></tt> - classes
+that transform the attachment. Defaults to [:thumbnail]
+<tt>preserve_files</tt> - whether to keep files on the filesystem when
+deleting to clearing the attachment. Defaults to false
+<tt>interpolator</tt> - the object used to interpolate filenames and URLs.
+Defaults to <a href="Interpolations.html">Paperclip::Interpolations</a>
+<tt>url_generator</tt> - the object used to generate URLs, using the
+interpolator. Defaults to <a
+href="UrlGenerator.html">Paperclip::UrlGenerator</a>
+</p>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000358" class="method-detail">
+        <a name="M000358"></a>
+
+        <div class="method-heading">
+          <a href="Attachment.src/M000358.html" target="Code" class="method-signature"
+            onclick="popupCode('Attachment.src/M000358.html');return false;">
+          <span class="method-name">assign</span><span class="method-args">(uploaded_file)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+What gets called when you call instance.attachment = File. It clears <a
+href="Attachment.html#M000365">errors</a>, assigns attributes, and
+processes the file. It also queues up the previous file for deletion, to be
+flushed away on <a href="Attachment.html#M000367">save</a> of its host. In
+addition to form uploads, you can also <a
+href="Attachment.html#M000358">assign</a> another <a
+href="../Paperclip.html">Paperclip</a> attachment:
+</p>
+<pre>
+  new_user.avatar = old_user.avatar
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000368" class="method-detail">
+        <a name="M000368"></a>
+
+        <div class="method-heading">
+          <a href="Attachment.src/M000368.html" target="Code" class="method-signature"
+            onclick="popupCode('Attachment.src/M000368.html');return false;">
+          <span class="method-name">clear</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Clears out the attachment. Has the same effect as previously assigning nil
+to the attachment. Does NOT <a href="Attachment.html#M000367">save</a>. If
+you wish to <a href="Attachment.html#M000368">clear</a> AND <a
+href="Attachment.html#M000367">save</a>, use <a
+href="Attachment.html#M000369">destroy</a>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000374" class="method-detail">
+        <a name="M000374"></a>
+
+        <div class="method-heading">
+          <a href="Attachment.src/M000374.html" target="Code" class="method-signature"
+            onclick="popupCode('Attachment.src/M000374.html');return false;">
+          <span class="method-name">content_type</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the <a href="Attachment.html#M000374">content_type</a> of the file
+as originally assigned, and lives in the &lt;attachment&gt;_content_type
+attribute of the model.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000362" class="method-detail">
+        <a name="M000362"></a>
+
+        <div class="method-heading">
+          <a href="Attachment.src/M000362.html" target="Code" class="method-signature"
+            onclick="popupCode('Attachment.src/M000362.html');return false;">
+          <span class="method-name">default_style</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000369" class="method-detail">
+        <a name="M000369"></a>
+
+        <div class="method-heading">
+          <a href="Attachment.src/M000369.html" target="Code" class="method-signature"
+            onclick="popupCode('Attachment.src/M000369.html');return false;">
+          <span class="method-name">destroy</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Destroys the attachment. Has the same effect as previously assigning nil to
+the attachment *and saving*. This is permanent. If you wish to wipe out the
+existing attachment but not <a href="Attachment.html#M000367">save</a>, use
+<a href="Attachment.html#M000368">clear</a>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000366" class="method-detail">
+        <a name="M000366"></a>
+
+        <div class="method-heading">
+          <a href="Attachment.src/M000366.html" target="Code" class="method-signature"
+            onclick="popupCode('Attachment.src/M000366.html');return false;">
+          <span class="method-name">dirty?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns true if there are changes that need to be saved.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000365" class="method-detail">
+        <a name="M000365"></a>
+
+        <div class="method-heading">
+          <a href="Attachment.src/M000365.html" target="Code" class="method-signature"
+            onclick="popupCode('Attachment.src/M000365.html');return false;">
+          <span class="method-name">errors</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns an array containing the <a
+href="Attachment.html#M000365">errors</a> on this attachment.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000379" class="method-detail">
+        <a name="M000379"></a>
+
+        <div class="method-heading">
+          <a href="Attachment.src/M000379.html" target="Code" class="method-signature"
+            onclick="popupCode('Attachment.src/M000379.html');return false;">
+          <span class="method-name">file?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns true if a file has been assigned.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000373" class="method-detail">
+        <a name="M000373"></a>
+
+        <div class="method-heading">
+          <a href="Attachment.src/M000373.html" target="Code" class="method-signature"
+            onclick="popupCode('Attachment.src/M000373.html');return false;">
+          <span class="method-name">fingerprint</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the <a href="Attachment.html#M000373">fingerprint</a> of the file,
+if one&#8216;s defined. The <a
+href="Attachment.html#M000373">fingerprint</a> is stored in the
+&lt;attachment&gt;_fingerpring attribute of the model.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000377" class="method-detail">
+        <a name="M000377"></a>
+
+        <div class="method-heading">
+          <a href="Attachment.src/M000377.html" target="Code" class="method-signature"
+            onclick="popupCode('Attachment.src/M000377.html');return false;">
+          <span class="method-name">hash_key</span><span class="method-args">(style_name = default_style)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns a unique hash suitable for obfuscating the URL of an otherwise
+publicly viewable attachment.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000383" class="method-detail">
+        <a name="M000383"></a>
+
+        <div class="method-heading">
+          <a href="Attachment.src/M000383.html" target="Code" class="method-signature"
+            onclick="popupCode('Attachment.src/M000383.html');return false;">
+          <span class="method-name">instance_read</span><span class="method-args">(attr)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Reads the attachment-specific attribute on the instance. See <a
+href="Attachment.html#M000382">instance_write</a> for more details.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000381" class="method-detail">
+        <a name="M000381"></a>
+
+        <div class="method-heading">
+          <a href="Attachment.src/M000381.html" target="Code" class="method-signature"
+            onclick="popupCode('Attachment.src/M000381.html');return false;">
+          <span class="method-name">instance_respond_to?</span><span class="method-args">(attr)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Determines whether the instance responds to this attribute. Used to prevent
+calculations on fields we won&#8216;t even store.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000382" class="method-detail">
+        <a name="M000382"></a>
+
+        <div class="method-heading">
+          <a href="Attachment.src/M000382.html" target="Code" class="method-signature"
+            onclick="popupCode('Attachment.src/M000382.html');return false;">
+          <span class="method-name">instance_write</span><span class="method-args">(attr, value)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Writes the attachment-specific attribute on the instance. For example, <a
+href="Attachment.html#M000382">instance_write</a>(:file_name,
+&quot;me.jpg&quot;) will write &quot;me.jpg&quot; to the instance&#8216;s
+&quot;avatar_file_name&quot; field (assuming the attachment is called
+avatar).
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000371" class="method-detail">
+        <a name="M000371"></a>
+
+        <div class="method-heading">
+          <a href="Attachment.src/M000371.html" target="Code" class="method-signature"
+            onclick="popupCode('Attachment.src/M000371.html');return false;">
+          <span class="method-name">original_filename</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the name of the file as originally assigned, and lives in the
+&lt;attachment&gt;_file_name attribute of the model.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000360" class="method-detail">
+        <a name="M000360"></a>
+
+        <div class="method-heading">
+          <a href="Attachment.src/M000360.html" target="Code" class="method-signature"
+            onclick="popupCode('Attachment.src/M000360.html');return false;">
+          <span class="method-name">path</span><span class="method-args">(style_name = default_style)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the <a href="Attachment.html#M000360">path</a> of the attachment as
+defined by the :<a href="Attachment.html#M000360">path</a> option. If the
+file is stored in the filesystem the <a
+href="Attachment.html#M000360">path</a> refers to the <a
+href="Attachment.html#M000360">path</a> of the file on disk. If the file is
+stored in S3, the <a href="Attachment.html#M000360">path</a> is the
+&quot;key&quot; part of the URL, and the :bucket option refers to the S3
+bucket.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000380" class="method-detail">
+        <a name="M000380"></a>
+
+        <div class="method-heading">
+          <span class="method-name">present?</span><span class="method-args">()</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for file?
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000364" class="method-detail">
+        <a name="M000364"></a>
+
+        <div class="method-heading">
+          <a href="Attachment.src/M000364.html" target="Code" class="method-signature"
+            onclick="popupCode('Attachment.src/M000364.html');return false;">
+          <span class="method-name">processors</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000378" class="method-detail">
+        <a name="M000378"></a>
+
+        <div class="method-heading">
+          <a href="Attachment.src/M000378.html" target="Code" class="method-signature"
+            onclick="popupCode('Attachment.src/M000378.html');return false;">
+          <span class="method-name">reprocess!</span><span class="method-args">(*style_args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This method really shouldn&#8216;t be called that often. It&#8216;s
+expected use is in the paperclip:refresh rake task and that&#8216;s it. It
+will regenerate all thumbnails forcefully, by reobtaining the original file
+and going through the post-process again.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000367" class="method-detail">
+        <a name="M000367"></a>
+
+        <div class="method-heading">
+          <a href="Attachment.src/M000367.html" target="Code" class="method-signature"
+            onclick="popupCode('Attachment.src/M000367.html');return false;">
+          <span class="method-name">save</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Saves the file, if there are no <a
+href="Attachment.html#M000365">errors</a>. If there are, it flushes them to
+the instance&#8216;s <a href="Attachment.html#M000365">errors</a> and
+returns false, cancelling the <a href="Attachment.html#M000367">save</a>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000372" class="method-detail">
+        <a name="M000372"></a>
+
+        <div class="method-heading">
+          <a href="Attachment.src/M000372.html" target="Code" class="method-signature"
+            onclick="popupCode('Attachment.src/M000372.html');return false;">
+          <span class="method-name">size</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the <a href="Attachment.html#M000372">size</a> of the file as
+originally assigned, and lives in the &lt;attachment&gt;_file_size
+attribute of the model.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000363" class="method-detail">
+        <a name="M000363"></a>
+
+        <div class="method-heading">
+          <a href="Attachment.src/M000363.html" target="Code" class="method-signature"
+            onclick="popupCode('Attachment.src/M000363.html');return false;">
+          <span class="method-name">styles</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000376" class="method-detail">
+        <a name="M000376"></a>
+
+        <div class="method-heading">
+          <a href="Attachment.src/M000376.html" target="Code" class="method-signature"
+            onclick="popupCode('Attachment.src/M000376.html');return false;">
+          <span class="method-name">time_zone</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+The time zone to use for timestamp interpolation. Using the default time
+zone ensures that results are consistent across all threads.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000361" class="method-detail">
+        <a name="M000361"></a>
+
+        <div class="method-heading">
+          <a href="Attachment.src/M000361.html" target="Code" class="method-signature"
+            onclick="popupCode('Attachment.src/M000361.html');return false;">
+          <span class="method-name">to_s</span><span class="method-args">(style_name = default_style)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias to <tt><a href="Attachment.html#M000359">url</a></tt>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000375" class="method-detail">
+        <a name="M000375"></a>
+
+        <div class="method-heading">
+          <a href="Attachment.src/M000375.html" target="Code" class="method-signature"
+            onclick="popupCode('Attachment.src/M000375.html');return false;">
+          <span class="method-name">updated_at</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the last modified time of the file as originally assigned, and
+lives in the &lt;attachment&gt;_updated_at attribute of the model.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000370" class="method-detail">
+        <a name="M000370"></a>
+
+        <div class="method-heading">
+          <a href="Attachment.src/M000370.html" target="Code" class="method-signature"
+            onclick="popupCode('Attachment.src/M000370.html');return false;">
+          <span class="method-name">uploaded_file</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the uploaded file if present.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000359" class="method-detail">
+        <a name="M000359"></a>
+
+        <div class="method-heading">
+          <a href="Attachment.src/M000359.html" target="Code" class="method-signature"
+            onclick="popupCode('Attachment.src/M000359.html');return false;">
+          <span class="method-name">url</span><span class="method-args">(style_name = default_style, options = {})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the public URL of the attachment with a given style. This does not
+necessarily need to point to a file that your Web server can access and can
+instead point to an action in your app, for example for fine grained
+security; this has a serious performance tradeoff.
+</p>
+<p>
+Options:
+</p>
+<p>
+<tt>timestamp</tt> - Add a timestamp to the end of the URL. Default: true.
+<tt>escape</tt> - Perform URI escaping to the URL. Default: true.
+</p>
+<p>
+Global controls (set on has_attached_file):
+</p>
+<p>
+<tt>interpolator</tt> - The object that fills in a URL pattern&#8216;s
+variables. <tt>default_url</tt> - The image to show when the attachment has
+no image. <tt><a href="Attachment.html#M000359">url</a></tt> - The URL for
+a saved image. <tt>url_generator</tt> - The object that generates a URL.
+Default: <a href="UrlGenerator.html">Paperclip::UrlGenerator</a>.
+</p>
+<p>
+As mentioned just above, the object that generates this URL can be passed
+in, for finer control. This object must respond to two methods:
+</p>
+<p>
++<a href="Attachment.html#M000357">new</a>(<a
+href="Attachment.html">Paperclip::Attachment</a>, options_hash)+
++for(style_name, options_hash)+
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

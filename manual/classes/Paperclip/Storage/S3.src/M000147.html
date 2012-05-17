@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>extended (Paperclip::Storage::S3)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/paperclip/lib/paperclip/storage/s3.rb, line 85</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">extended</span> <span class="ruby-identifier">base</span>
+        <span class="ruby-keyword kw">begin</span>
+          <span class="ruby-identifier">require</span> <span class="ruby-value str">'aws-sdk'</span>
+        <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">LoadError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+          <span class="ruby-identifier">e</span>.<span class="ruby-identifier">message</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot; (You may need to install the aws-sdk gem)&quot;</span>
+          <span class="ruby-identifier">raise</span> <span class="ruby-identifier">e</span>
+        <span class="ruby-keyword kw">end</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-keyword kw">defined?</span>(<span class="ruby-constant">AWS</span><span class="ruby-operator">::</span><span class="ruby-constant">Core</span>)
+
+        <span class="ruby-identifier">base</span>.<span class="ruby-identifier">instance_eval</span> <span class="ruby-keyword kw">do</span>
+          <span class="ruby-ivar">@s3_options</span>     = <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:s3_options</span>]     <span class="ruby-operator">||</span> {}
+          <span class="ruby-ivar">@s3_permissions</span> = <span class="ruby-identifier">set_permissions</span>(<span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:s3_permissions</span>])
+          <span class="ruby-ivar">@s3_protocol</span>    = <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:s3_protocol</span>]    <span class="ruby-operator">||</span>
+            <span class="ruby-constant">Proc</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">style</span>, <span class="ruby-identifier">attachment</span><span class="ruby-operator">|</span>
+              <span class="ruby-identifier">permission</span>  = (<span class="ruby-ivar">@s3_permissions</span>[<span class="ruby-identifier">style</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">to_sym</span>] <span class="ruby-operator">||</span> <span class="ruby-ivar">@s3_permissions</span>[<span class="ruby-identifier">:default</span>])
+              <span class="ruby-identifier">permission</span>  = <span class="ruby-identifier">permission</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">attachment</span>, <span class="ruby-identifier">style</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">permission</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Proc</span>)
+              (<span class="ruby-identifier">permission</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:public_read</span>) <span class="ruby-operator">?</span> <span class="ruby-value str">'http'</span> <span class="ruby-operator">:</span> <span class="ruby-value str">'https'</span>
+            <span class="ruby-keyword kw">end</span>
+          <span class="ruby-ivar">@s3_metadata</span> = <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:s3_metadata</span>] <span class="ruby-operator">||</span> {}
+          <span class="ruby-ivar">@s3_headers</span> = <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:s3_headers</span>] <span class="ruby-operator">||</span> {}
+          <span class="ruby-ivar">@s3_headers</span> = <span class="ruby-ivar">@s3_headers</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">instance</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@s3_headers</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Proc</span>)
+          <span class="ruby-ivar">@s3_headers</span> = (<span class="ruby-ivar">@s3_headers</span>).<span class="ruby-identifier">inject</span>({}) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">headers</span>,(<span class="ruby-identifier">name</span>,<span class="ruby-identifier">value</span>)<span class="ruby-operator">|</span>
+            <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>
+            <span class="ruby-keyword kw">when</span> <span class="ruby-regexp re">/^x-amz-meta-(.*)/i</span>
+              <span class="ruby-ivar">@s3_metadata</span>[<span class="ruby-identifier">$1</span>.<span class="ruby-identifier">downcase</span>] = <span class="ruby-identifier">value</span>
+            <span class="ruby-keyword kw">else</span>
+              <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/^x-amz-/</span>,<span class="ruby-value str">''</span>).<span class="ruby-identifier">tr</span>(<span class="ruby-value str">&quot;-&quot;</span>,<span class="ruby-value str">&quot;_&quot;</span>).<span class="ruby-identifier">to_sym</span>
+              <span class="ruby-identifier">headers</span>[<span class="ruby-identifier">name</span>] = <span class="ruby-identifier">value</span>
+            <span class="ruby-keyword kw">end</span>
+            <span class="ruby-identifier">headers</span>
+          <span class="ruby-keyword kw">end</span>
+
+          <span class="ruby-ivar">@s3_headers</span>[<span class="ruby-identifier">:storage_class</span>] = <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:s3_storage_class</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:s3_storage_class</span>]
+
+          <span class="ruby-ivar">@s3_server_side_encryption</span> = <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:s3_server_side_encryption</span>]
+
+          <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:url</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/^:s3.*url$/</span>) <span class="ruby-operator">||</span> <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:url</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;:asset_host&quot;</span>
+            <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:path</span>] = <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:path</span>].<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/:url/</span>, <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:url</span>]).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/^:rails_root\/public\/system/</span>, <span class="ruby-value str">''</span>)
+            <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:url</span>]  = <span class="ruby-value str">&quot;:s3_path_url&quot;</span>
+          <span class="ruby-keyword kw">end</span>
+          <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:url</span>] = <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:url</span>].<span class="ruby-identifier">inspect</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:url</span>].<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Symbol</span>)
+
+          <span class="ruby-ivar">@http_proxy</span> = <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:http_proxy</span>] <span class="ruby-operator">||</span> <span class="ruby-keyword kw">nil</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-constant">Paperclip</span>.<span class="ruby-identifier">interpolates</span>(<span class="ruby-identifier">:s3_alias_url</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">attachment</span>, <span class="ruby-identifier">style</span><span class="ruby-operator">|</span>
+          <span class="ruby-node">&quot;#{attachment.s3_protocol(style)}://#{attachment.s3_host_alias}/#{attachment.path(style).gsub(%r{^/}, &quot;&quot;)}&quot;</span>
+        <span class="ruby-keyword kw">end</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">Paperclip</span><span class="ruby-operator">::</span><span class="ruby-constant">Interpolations</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-identifier">:s3_alias_url</span>
+        <span class="ruby-constant">Paperclip</span>.<span class="ruby-identifier">interpolates</span>(<span class="ruby-identifier">:s3_path_url</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">attachment</span>, <span class="ruby-identifier">style</span><span class="ruby-operator">|</span>
+          <span class="ruby-node">&quot;#{attachment.s3_protocol(style)}://#{attachment.s3_host_name}/#{attachment.bucket_name}/#{attachment.path(style).gsub(%r{^/}, &quot;&quot;)}&quot;</span>
+        <span class="ruby-keyword kw">end</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">Paperclip</span><span class="ruby-operator">::</span><span class="ruby-constant">Interpolations</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-identifier">:s3_path_url</span>
+        <span class="ruby-constant">Paperclip</span>.<span class="ruby-identifier">interpolates</span>(<span class="ruby-identifier">:s3_domain_url</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">attachment</span>, <span class="ruby-identifier">style</span><span class="ruby-operator">|</span>
+          <span class="ruby-node">&quot;#{attachment.s3_protocol(style)}://#{attachment.bucket_name}.#{attachment.s3_host_name}/#{attachment.path(style).gsub(%r{^/}, &quot;&quot;)}&quot;</span>
+        <span class="ruby-keyword kw">end</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">Paperclip</span><span class="ruby-operator">::</span><span class="ruby-constant">Interpolations</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-identifier">:s3_domain_url</span>
+        <span class="ruby-constant">Paperclip</span>.<span class="ruby-identifier">interpolates</span>(<span class="ruby-identifier">:asset_host</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">attachment</span>, <span class="ruby-identifier">style</span><span class="ruby-operator">|</span>
+          <span class="ruby-node">&quot;#{attachment.path(style).gsub(%r{^/}, &quot;&quot;)}&quot;</span>
+        <span class="ruby-keyword kw">end</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">Paperclip</span><span class="ruby-operator">::</span><span class="ruby-constant">Interpolations</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-identifier">:asset_host</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

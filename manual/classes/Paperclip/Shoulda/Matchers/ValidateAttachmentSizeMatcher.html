@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Paperclip::Shoulda::Matchers::ValidateAttachmentSizeMatcher</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Paperclip::Shoulda::Matchers::ValidateAttachmentSizeMatcher</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../../files/vendor/plugins/paperclip/lib/paperclip/matchers/validate_attachment_size_matcher_rb.html">
+                vendor/plugins/paperclip/lib/paperclip/matchers/validate_attachment_size_matcher.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Object
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000217">description</a>&nbsp;&nbsp;
+      <a href="#M000215">failure_message</a>&nbsp;&nbsp;
+      <a href="#M000212">greater_than</a>&nbsp;&nbsp;
+      <a href="#M000223">higher_than_high?</a>&nbsp;&nbsp;
+      <a href="#M000221">higher_than_low?</a>&nbsp;&nbsp;
+      <a href="#M000213">in</a>&nbsp;&nbsp;
+      <a href="#M000211">less_than</a>&nbsp;&nbsp;
+      <a href="#M000222">lower_than_high?</a>&nbsp;&nbsp;
+      <a href="#M000220">lower_than_low?</a>&nbsp;&nbsp;
+      <a href="#M000214">matches?</a>&nbsp;&nbsp;
+      <a href="#M000216">negative_failure_message</a>&nbsp;&nbsp;
+      <a href="#M000210">new</a>&nbsp;&nbsp;
+      <a href="#M000218">override_method</a>&nbsp;&nbsp;
+      <a href="#M000219">passes_validation_with_size</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000210" class="method-detail">
+        <a name="M000210"></a>
+
+        <div class="method-heading">
+          <a href="ValidateAttachmentSizeMatcher.src/M000210.html" target="Code" class="method-signature"
+            onclick="popupCode('ValidateAttachmentSizeMatcher.src/M000210.html');return false;">
+          <span class="method-name">new</span><span class="method-args">(attachment_name)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000217" class="method-detail">
+        <a name="M000217"></a>
+
+        <div class="method-heading">
+          <a href="ValidateAttachmentSizeMatcher.src/M000217.html" target="Code" class="method-signature"
+            onclick="popupCode('ValidateAttachmentSizeMatcher.src/M000217.html');return false;">
+          <span class="method-name">description</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000215" class="method-detail">
+        <a name="M000215"></a>
+
+        <div class="method-heading">
+          <a href="ValidateAttachmentSizeMatcher.src/M000215.html" target="Code" class="method-signature"
+            onclick="popupCode('ValidateAttachmentSizeMatcher.src/M000215.html');return false;">
+          <span class="method-name">failure_message</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000212" class="method-detail">
+        <a name="M000212"></a>
+
+        <div class="method-heading">
+          <a href="ValidateAttachmentSizeMatcher.src/M000212.html" target="Code" class="method-signature"
+            onclick="popupCode('ValidateAttachmentSizeMatcher.src/M000212.html');return false;">
+          <span class="method-name">greater_than</span><span class="method-args">(size)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000213" class="method-detail">
+        <a name="M000213"></a>
+
+        <div class="method-heading">
+          <a href="ValidateAttachmentSizeMatcher.src/M000213.html" target="Code" class="method-signature"
+            onclick="popupCode('ValidateAttachmentSizeMatcher.src/M000213.html');return false;">
+          <span class="method-name">in</span><span class="method-args">(range)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000211" class="method-detail">
+        <a name="M000211"></a>
+
+        <div class="method-heading">
+          <a href="ValidateAttachmentSizeMatcher.src/M000211.html" target="Code" class="method-signature"
+            onclick="popupCode('ValidateAttachmentSizeMatcher.src/M000211.html');return false;">
+          <span class="method-name">less_than</span><span class="method-args">(size)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000214" class="method-detail">
+        <a name="M000214"></a>
+
+        <div class="method-heading">
+          <a href="ValidateAttachmentSizeMatcher.src/M000214.html" target="Code" class="method-signature"
+            onclick="popupCode('ValidateAttachmentSizeMatcher.src/M000214.html');return false;">
+          <span class="method-name">matches?</span><span class="method-args">(subject)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000216" class="method-detail">
+        <a name="M000216"></a>
+
+        <div class="method-heading">
+          <a href="ValidateAttachmentSizeMatcher.src/M000216.html" target="Code" class="method-signature"
+            onclick="popupCode('ValidateAttachmentSizeMatcher.src/M000216.html');return false;">
+          <span class="method-name">negative_failure_message</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <h3 class="section-bar">Protected Instance methods</h3>
+
+      <div id="method-M000223" class="method-detail">
+        <a name="M000223"></a>
+
+        <div class="method-heading">
+          <a href="ValidateAttachmentSizeMatcher.src/M000223.html" target="Code" class="method-signature"
+            onclick="popupCode('ValidateAttachmentSizeMatcher.src/M000223.html');return false;">
+          <span class="method-name">higher_than_high?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000221" class="method-detail">
+        <a name="M000221"></a>
+
+        <div class="method-heading">
+          <a href="ValidateAttachmentSizeMatcher.src/M000221.html" target="Code" class="method-signature"
+            onclick="popupCode('ValidateAttachmentSizeMatcher.src/M000221.html');return false;">
+          <span class="method-name">higher_than_low?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000222" class="method-detail">
+        <a name="M000222"></a>
+
+        <div class="method-heading">
+          <a href="ValidateAttachmentSizeMatcher.src/M000222.html" target="Code" class="method-signature"
+            onclick="popupCode('ValidateAttachmentSizeMatcher.src/M000222.html');return false;">
+          <span class="method-name">lower_than_high?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000220" class="method-detail">
+        <a name="M000220"></a>
+
+        <div class="method-heading">
+          <a href="ValidateAttachmentSizeMatcher.src/M000220.html" target="Code" class="method-signature"
+            onclick="popupCode('ValidateAttachmentSizeMatcher.src/M000220.html');return false;">
+          <span class="method-name">lower_than_low?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000218" class="method-detail">
+        <a name="M000218"></a>
+
+        <div class="method-heading">
+          <a href="ValidateAttachmentSizeMatcher.src/M000218.html" target="Code" class="method-signature"
+            onclick="popupCode('ValidateAttachmentSizeMatcher.src/M000218.html');return false;">
+          <span class="method-name">override_method</span><span class="method-args">(object, method, &amp;replacement)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000219" class="method-detail">
+        <a name="M000219"></a>
+
+        <div class="method-heading">
+          <a href="ValidateAttachmentSizeMatcher.src/M000219.html" target="Code" class="method-signature"
+            onclick="popupCode('ValidateAttachmentSizeMatcher.src/M000219.html');return false;">
+          <span class="method-name">passes_validation_with_size</span><span class="method-args">(new_size)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>
